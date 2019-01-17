@@ -5,6 +5,9 @@ UBC CPSC 304 Term Project: Front-end Repository
 ## Team
 
 [Nicholas Kong](https://github.com/Asiapenguin)
-Cindy Tu
-Kelsey Law
-Andrew Choi
+
+[Cindy Tu](https://github.com/cindy-yhtu)
+
+[Kelsey Law](https://github.com/kelseylaw)
+
+[Andrew Choi](https://github.com/andrchoi)
