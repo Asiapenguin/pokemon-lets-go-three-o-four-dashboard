@@ -11,3 +11,12 @@ UBC CPSC 304 Term Project: Front-end Repository
 [Kelsey Law](https://github.com/kelseylaw)
 
 [Andrew Choi](https://github.com/andrchoi)
+
+## Development Notes
+
+### Setup & Run Dev Server
+
+```bash
+$ npm install     # install dependencies
+$ ng serve --open # run development server and open on default browser
+```
