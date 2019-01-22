@@ -8,18 +8,10 @@ import {
   ViewChild
 } from '@angular/core';
 
-/**
- * LoginData Class
- * Passed in as the first parameter when LoginComponent emits loginAction output
- */
 export class LoginData {
   public username: string;
-  public password: string;
 }
 
-/**
- * LoginComponent Class
- */
 @Component({
   selector: 'app-login',
   templateUrl: './login-page.component.html',
@@ -28,9 +20,7 @@ export class LoginData {
 export class LoginPageComponent implements AfterViewInit {
   @Output() login = new EventEmitter<LoginData>();
   @Input() autofocus = true; // should autofocus username field (default true)
-  @Input() error: string; // error msg display
 
-  @ViewChild('errorDisplay') errorDisplay: ElementRef;
   @ViewChild('usernameInput') usernameInput: ElementRef;
   loginData: LoginData = new LoginData();
 
@@ -50,9 +40,6 @@ export class LoginPageComponent implements AfterViewInit {
     const username = loginData.username;
     loginData.username = username.replace(/[^0-9a-zA-Z@_]/g, '');
 
-    let password = loginData.password;
-    password = password.trim();
-    loginData.password = password;
     return loginData;
   }
 }
