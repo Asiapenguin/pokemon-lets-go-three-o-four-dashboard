@@ -1,0 +1,18 @@
+<div class="align-middle">
+  <img class="mx-auto d-block" src="../../../assets/logo.png">
+  <form #loginForm='ngForm' class='form' (ngSubmit)='emitLoginData()' autocomplete="off">
+    <div class='form-group'>
+      <div class="input-group mb-3 col-4 mx-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fas fa-globe"></i>
+          </span>
+        </div>
+        <input #usernameInput type="text" name='username' class="form-control" required [(ngModel)]='loginData.username' placeholder="Enter your username, or create one here">
+      </div>
+    </div>
+    <div class="col-4 mx-auto">
+      <button type='submit' [disabled]='loginForm.invalid || loginForm.pristine' class="btn btn-login btn-lg w-100" [ngClass]='{ active: loginForm.valid }'>Sign In</button>
+    </div>
+  </form>
+</div>
