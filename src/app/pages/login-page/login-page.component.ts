@@ -7,6 +7,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 export class LoginData {
   public username: string;
@@ -24,6 +25,8 @@ export class LoginPageComponent implements AfterViewInit {
   @ViewChild('usernameInput') usernameInput: ElementRef;
   loginData: LoginData = new LoginData();
 
+  constructor(private router: Router) {}
+
   ngAfterViewInit() {
     if (this.autofocus) {
       this.usernameInput.nativeElement.focus();
@@ -33,6 +36,8 @@ export class LoginPageComponent implements AfterViewInit {
   // Emit event to login output
   emitLoginData() {
     this.login.emit(this.sanitize(this.loginData));
+    console.log("Username is: " + this.loginData);
+    this.router.navigate(["/home"]);
   }
 
   // Sanitize input
