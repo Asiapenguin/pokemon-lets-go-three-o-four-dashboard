@@ -20,3 +20,9 @@ UBC CPSC 304 Term Project: Front-end Repository
 $ npm install     # install dependencies
 $ ng serve --open # run development server and open on default browser
 ```
+#### Notes
+
+If you run into issues, maybe try this
+```
+$ npm rebuild node-sass
+```
