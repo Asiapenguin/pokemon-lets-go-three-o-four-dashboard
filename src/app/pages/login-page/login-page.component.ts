@@ -2,30 +2,32 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
   Input,
-  Output,
   ViewChild
-} from '@angular/core';
-import { Router } from '@angular/router';
+} from "@angular/core";
+import { AuthenticationService } from "src/app/services/authentication.service";
+import { RouteService } from "src/app/services/route.service";
 
 export class LoginData {
   public username: string;
+  public password: string;
 }
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  selector: "app-login",
+  templateUrl: "./login-page.component.html",
+  styleUrls: ["./login-page.component.scss"]
 })
 export class LoginPageComponent implements AfterViewInit {
-  @Output() login = new EventEmitter<LoginData>();
   @Input() autofocus = true; // should autofocus username field (default true)
 
-  @ViewChild('usernameInput') usernameInput: ElementRef;
+  @ViewChild("usernameInput") usernameInput: ElementRef;
   loginData: LoginData = new LoginData();
 
-  constructor(private router: Router) {}
+  constructor(
+    private routeService: RouteService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngAfterViewInit() {
     if (this.autofocus) {
@@ -34,16 +36,27 @@ export class LoginPageComponent implements AfterViewInit {
   }
 
   // Emit event to login output
-  emitLoginData() {
-    this.login.emit(this.sanitize(this.loginData));
-    console.log("Username is: " + this.loginData);
-    this.router.navigate(["/home"]);
+  doLogin() {
+    const sanitizedLoginData = this.sanitize(this.loginData);
+    this.authenticationService
+      .authenticate(sanitizedLoginData.username, sanitizedLoginData.password)
+      .then(
+        user => {
+          if (user) {
+            console.log("User Data: ", user);
+            this.routeService.goToHome();
+          }
+        },
+        err => {
+          console.log("login-page error: ", err);
+        }
+      );
   }
 
   // Sanitize input
   private sanitize(loginData: LoginData): LoginData {
     const username = loginData.username;
-    loginData.username = username.replace(/[^0-9a-zA-Z@_]/g, '');
+    loginData.username = username.replace(/[^0-9a-zA-Z@_]/g, "");
 
     return loginData;
   }
