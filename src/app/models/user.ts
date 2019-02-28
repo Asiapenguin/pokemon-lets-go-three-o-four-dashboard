@@ -10,5 +10,4 @@ export class User extends Resource {
   location: string;
   characterName: string;
   gender: string;
-  // starterChoice: number;
 }

@@ -1,6 +1,8 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
+import { Pokemon } from 'src/app/models/pokemon';
+import { PokemonService } from 'src/app/services/pokemon.service';
 
 export class SignUpData {
   public username: string;
@@ -17,15 +19,28 @@ export class SignUpData {
 export class UserNewPageComponent {
   signUpData: SignUpData = new SignUpData();
   user: User = new User();
-  starter: number;
+  pokemon: Pokemon = new Pokemon();
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private pokemonService: PokemonService) { }
 
   doSignUp() {
-    console.log(this.user, this.starter);
+    // POST /user
+    this.userService.create(this.user).then((data: User) => {
+      this.user = data;
+      console.log("After create user: ", this.user);
+      this.pokemon.ownerID = this.user.id;
+      // POST /pokemon
+      this.pokemonService.create(this.pokemon).then((data: Pokemon) => {
+        this.pokemon = data;
+        console.log("After create pokemon: ", this.pokemon);
+      })
+    },
+    err => {
+      console.log(err);
+    });
   }
 
   setStarter(pokedexNumber: number) {
-    this.starter = pokedexNumber;
+    this.pokemon.dexNum = pokedexNumber;
   }
 }
