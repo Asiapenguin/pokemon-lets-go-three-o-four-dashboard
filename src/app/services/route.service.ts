@@ -14,4 +14,8 @@ export class RouteService {
   goToLogin() {
     this.router.navigate(["/login"], { replaceUrl: true });
   }
+
+  goToCreateAccount() {
+    this.router.navigate(["/new"], { replaceUrl: true });
+  }
 }

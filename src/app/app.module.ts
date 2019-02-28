@@ -10,6 +10,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { LayoutComponent } from "./layout/layout.component";
 import { HeaderComponent } from "./layout/header/header.component";
 import { MainComponent } from "./layout/main/main.component";
+import { UserNewPageComponent } from "./pages/user-new-page/user-new-page.component";
+import { UserFormComponent } from "./components/user-form/user-form.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { MainComponent } from "./layout/main/main.component";
     LoginPageComponent,
     LayoutComponent,
     HeaderComponent,
-    MainComponent
+    MainComponent,
+    UserNewPageComponent,
+    UserFormComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule],
   providers: [],

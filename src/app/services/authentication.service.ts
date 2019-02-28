@@ -16,7 +16,7 @@ export class AuthenticationService {
 
   isAuthenticated() {
     // TODO: Check for username and password match
-    return true;
+    return false;
   }
 
   getUser(): User {
@@ -31,7 +31,9 @@ export class AuthenticationService {
         username: "nickkong",
         password: "1234",
         location: "Pallet Town",
-        badges_owned: 0
+        badges_owned: 0,
+        characterName: "Asiapenguin",
+        gender: "Male"
       };
 
       res(user);

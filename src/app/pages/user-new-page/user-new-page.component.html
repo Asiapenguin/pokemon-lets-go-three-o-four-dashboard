@@ -1,0 +1,44 @@
+<div class="align-middle">
+  <img class="mx-auto d-block" src="../../../assets/logo.png" />
+  <form
+    #signUpForm="ngForm"
+    class="form mb-2"
+    (ngSubmit)="doSignUp()"
+    autocomplete="off"
+  >
+    <app-user-form [user]="user"></app-user-form>
+    <div class="form-group">
+      <label for="starter">Choose your starter Pokemon</label><br />
+      <div class="p-2">
+        <img
+          class="starter mr-4"
+          src="../../../assets/pokemon-sprites/Bulbasaur.gif"
+          [class.selected]="starter === 1"
+          (click)="setStarter(1)"
+        />
+        <img
+          class="starter mr-4"
+          src="../../../assets/pokemon-sprites/Charmander.gif"
+          [class.selected]="starter === 4"
+          (click)="setStarter(4)"
+        />
+        <img
+          class="starter"
+          src="../../../assets/pokemon-sprites/Squirtle.gif"
+          [class.selected]="starter === 7"
+          (click)="setStarter(7)"
+        />
+      </div>
+    </div>
+    <div>
+      <button
+        type="submit"
+        [disabled]="signUpForm.invalid"
+        class="btn btn-lg w-100"
+        [ngClass]="{ active: signUpForm.valid }"
+      >
+        Sign-Up
+      </button>
+    </div>
+  </form>
+</div>

@@ -3,6 +3,7 @@ import { LoginPageComponent } from "src/app/pages/login-page/login-page.componen
 import { HomePageComponent } from "src/app/pages/home-page/home-page.component";
 import { LayoutComponent } from "src/app/layout/layout.component";
 import { AuthenticationGuard } from "src/app/services/authentication.guard";
+import { UserNewPageComponent } from "src/app/pages/user-new-page/user-new-page.component";
 
 export const authenticatedRoutes: Routes = [
   {
@@ -26,7 +27,20 @@ export const routes: Routes = [
     children: authenticatedRoutes,
     canActivate: [AuthenticationGuard]
   },
-  { path: "login", component: LoginPageComponent, data: { title: "Login" } },
+  {
+    path: "login",
+    component: LoginPageComponent,
+    data: {
+      title: "Login"
+    }
+  },
+  {
+    path: "new",
+    component: UserNewPageComponent,
+    data: {
+      title: "New User"
+    }
+  },
   {
     path: "**",
     redirectTo: "home",

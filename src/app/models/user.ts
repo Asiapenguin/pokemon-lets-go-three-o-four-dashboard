@@ -8,4 +8,7 @@ export class User extends Resource {
   password: string;
   badges_owned: number;
   location: string;
+  characterName: string;
+  gender: string;
+  // starterChoice: number;
 }

@@ -60,4 +60,8 @@ export class LoginPageComponent implements AfterViewInit {
 
     return loginData;
   }
+
+  createNewAccount() {
+    this.routeService.goToCreateAccount();
+  }
 }
