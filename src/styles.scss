@@ -1,18 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
-.btn-primary {
-  background-color: #E1735C;
-  border-color: #E1735C;
+nav {
+  background-color: #F7DE82;
+}
 
-  :hover {
-    background-color: #D4614A;
+.btn-pokemon {
+  margin-top: 25px;
+  width: 400px;
+  cursor: pointer;
+  border-radius: 300px;
+  color: white; 
+
+  &.active {
+    color: white;
+    background: #E1735C;
   }
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
-  background-color: #D4614A;
-  border-color: #D4614A;
+body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: inline-block;
+  width: 100%;
+  padding: 35px;
+  background: #F7DE82;
+  font-family: CircularStdBlack;
 }
 
-nav {
-  background-color: #F7DE82;
+.input-group-text {
+  background: #E1735C;
+}
+
+.form-control, .input-group-prepend .input-group-text {
+  border: 0;
+  outline: none;
+}
+
+.fas {
+  color: white;
 }

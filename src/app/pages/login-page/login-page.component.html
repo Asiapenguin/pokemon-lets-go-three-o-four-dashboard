@@ -50,12 +50,12 @@
       <button
         type="submit"
         [disabled]="loginForm.invalid || loginForm.pristine"
-        class="btn btn-login btn-lg w-100"
+        class="btn btn-pokemon btn-lg w-100"
         [ngClass]="{ active: loginForm.valid }"
       >
         Sign In
       </button>
-      <button (click)="createNewAccount()" class="btn btn-signup btn-lg w-100">Sign-up</button>
+      <button (click)="createNewAccount()" class="btn btn-pokemon active btn-lg w-100">Sign-up</button>
     </div>
   </form>
 </div>

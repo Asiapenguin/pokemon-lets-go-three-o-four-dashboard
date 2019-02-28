@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { User } from "src/app/models/user";
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-user-form',
