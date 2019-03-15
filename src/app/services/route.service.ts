@@ -11,6 +11,10 @@ export class RouteService {
     this.router.navigate(["/home"], { replaceUrl: true });
   }
 
+  goToAdmin() {
+    this.router.navigate(["/admin"], { replaceUrl: true });
+  }
+
   goToLogin() {
     this.router.navigate(["/login"], { replaceUrl: true });
   }

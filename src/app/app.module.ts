@@ -12,6 +12,7 @@ import { HeaderComponent } from "./layout/header/header.component";
 import { MainComponent } from "./layout/main/main.component";
 import { UserNewPageComponent } from "./pages/user-new-page/user-new-page.component";
 import { UserFormComponent } from "./components/user-form/user-form.component";
+import { AdminPageComponent } from "./pages/admin-page/admin-page.component";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserFormComponent } from "./components/user-form/user-form.component";
     HeaderComponent,
     MainComponent,
     UserNewPageComponent,
-    UserFormComponent
+    UserFormComponent,
+    AdminPageComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule],
   providers: [],

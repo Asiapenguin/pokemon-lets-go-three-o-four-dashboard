@@ -14,9 +14,14 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private urlService: UrlService) {}
 
-  isAuthenticated() {
+  isUserAuthenticated() {
     // TODO: Check for username and password match
-    return false;
+    return true;
+  }
+
+  isAdminAuthenticated() {
+    // TODO: Check for username and password match, and admin privileges
+    return true;
   }
 
   getUser(): User {
@@ -33,8 +38,11 @@ export class AuthenticationService {
         location: "Pallet Town",
         badges_owned: 0,
         characterName: "Asiapenguin",
-        gender: "Male"
+        gender: "Male",
+        admin: true
       };
+
+      this.user = user;
 
       res(user);
 

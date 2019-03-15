@@ -9,6 +9,9 @@ import { RouteService } from "src/app/services/route.service";
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
+
+  admin = false;
+
   constructor(
     private headerService: HeaderService,
     private authenticationService: AuthenticationService,
@@ -17,7 +20,17 @@ export class HeaderComponent implements OnInit {
     this.headerService.setComponent(this);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.admin = this.checkAdminPrivileges();
+  }
+
+  checkAdminPrivileges() {
+    const user = this.authenticationService.getUser();
+    if (user.admin) {
+      return true;
+    }
+    return false;
+  }
 
   logout() {
     this.authenticationService.logout();

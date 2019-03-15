@@ -3,7 +3,7 @@
     <img src="../../../assets/logo.png" width="32px">
     Pokémon Let's Go 304
   </div>
-  <ul class="navbar-nav mr-auto">
+  <ul *ngIf="!admin" class="navbar-nav mr-auto">
     <li class="nav-item">
       <a class="nav-link" routerLink="/home">Home</a>
     </li>
@@ -12,6 +12,11 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/profile">Profile</a>
+    </li>
+  </ul>
+  <ul *ngIf="admin" class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin">Admin</a>
     </li>
   </ul>
   <button class="btn btn-primary pull-right" (click)="logout()">Logout</button>

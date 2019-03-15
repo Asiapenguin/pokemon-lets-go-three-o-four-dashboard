@@ -44,7 +44,11 @@ export class LoginPageComponent implements AfterViewInit {
         user => {
           if (user) {
             console.log("User Data: ", user);
-            this.routeService.goToHome();
+            if (user.admin) {
+              this.routeService.goToAdmin();
+            } else {
+              this.routeService.goToHome();
+            }
           }
         },
         err => {
