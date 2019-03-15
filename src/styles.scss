@@ -16,6 +16,16 @@ nav {
   }
 }
 
+.btn-primary {
+  background: #E1735C;
+  border-color: #E1735C;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+  background-color: #D4614A;
+  border-color: #D4614A;
+}
+
 body {
   position: absolute;
   left: 0;

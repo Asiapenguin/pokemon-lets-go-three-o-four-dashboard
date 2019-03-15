@@ -1,0 +1,10 @@
+nav {
+    border-bottom: 1px solid black;
+}
+
+.navbar-nav {
+    flex-direction: row;
+    .nav-item {
+        margin-right: 4px;
+    }
+}
