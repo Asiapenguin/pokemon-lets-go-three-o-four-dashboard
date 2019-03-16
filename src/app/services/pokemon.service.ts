@@ -9,4 +9,8 @@ export class PokemonService extends ResourceService {
   constructor(injector: Injector) {
     super(injector, Pokemon);
   }
+
+  getLegendaryDexNums() {
+    return [144, 145, 146, 150, 151];
+  }
 }

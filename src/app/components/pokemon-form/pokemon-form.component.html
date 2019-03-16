@@ -1,4 +1,4 @@
-<label>Add Pokemon</label>
+<label>Add Pokemon(s)</label>
 <form #addForm="ngForm" (ngSubmit)="addPokemon()">
   <div class="row">
     <div class="col-4">
@@ -38,12 +38,12 @@
     <div class="col-4">
       <div class="input-group mb-3">
         <input
-          #pokemonIdInput
+          #editPokemonIdInput
           type="text"
-          name="pokemonId"
+          name="editPokemonId"
           class="form-control"
           required
-          [(ngModel)]="pokemonInfo.pokemonId"
+          [(ngModel)]="pokemonInfo.editPokemonId"
           placeholder="Pokemon ID"
         />
       </div>
@@ -66,5 +66,49 @@
     </div>
   </div>
 </form>
-<form #deleteForm="ngForm" (ngSubmit)="deletePokemon()"></form>
-<form #addRandomForm="ngForm" (ngSubmit)="addRandomNumPokemon()"></form>
+<label>Delete a Pokemon</label>
+<form #deleteForm="ngForm" (ngSubmit)="deletePokemon()">
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #deletePokemonIdInput
+          type="text"
+          name="deletePokemonId"
+          class="form-control"
+          required
+          [(ngModel)]="pokemonInfo.deletePokemonId"
+          placeholder="Pokemon ID"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-secondary" (click)="deletePokemon()">
+        Delete
+      </button>
+    </div>
+  </div>
+</form>
+<label>Add Random Pokemon(s)</label>
+<form #addRandomForm="ngForm" (ngSubmit)="addRandomNumPokemon()">
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #addRandomPokemonInput
+          type="text"
+          name="randomQuantity"
+          class="form-control"
+          required
+          [(ngModel)]="pokemonInfo.randomQuantity"
+          placeholder="Quantity"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-secondary" (click)="addRandomNumPokemon()">
+        Delete
+      </button>
+    </div>
+  </div>
+</form>
