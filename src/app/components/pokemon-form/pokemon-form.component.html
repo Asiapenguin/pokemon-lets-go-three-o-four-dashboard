@@ -1,0 +1,70 @@
+<label>Add Pokemon</label>
+<form #addForm="ngForm" (ngSubmit)="addPokemon()">
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #dexNumInput
+          type="text"
+          name="dexNum"
+          class="form-control"
+          required
+          [(ngModel)]="pokemonInfo.dexNum"
+          placeholder="Pokedex #"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #quantityInput
+          type="text"
+          name="quantity"
+          class="form-control"
+          required
+          [(ngModel)]="pokemonInfo.quantity"
+          placeholder="Quantity"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-secondary" (click)="addPokemon()">Add</button>
+    </div>
+  </div>
+</form>
+<label>Edit Owner of Existing Pokemon</label>
+<form #editForm="ngForm" (ngSubmit)="editOwner()">
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #pokemonIdInput
+          type="text"
+          name="pokemonId"
+          class="form-control"
+          required
+          [(ngModel)]="pokemonInfo.pokemonId"
+          placeholder="Pokemon ID"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #newCharIdInput
+          type="text"
+          name="newCharId"
+          class="form-control"
+          required
+          [(ngModel)]="pokemonInfo.newCharId"
+          placeholder="New Player ID"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-secondary" (click)="editOwner()">Change</button>
+    </div>
+  </div>
+</form>
+<form #deleteForm="ngForm" (ngSubmit)="deletePokemon()"></form>
+<form #addRandomForm="ngForm" (ngSubmit)="addRandomNumPokemon()"></form>

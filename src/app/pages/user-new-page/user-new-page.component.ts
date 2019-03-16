@@ -3,6 +3,7 @@ import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
 import { Pokemon } from 'src/app/models/pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
+import { RouteService } from "src/app/services/route.service";
 
 export class SignUpData {
   public username: string;
@@ -21,7 +22,7 @@ export class UserNewPageComponent {
   user: User = new User();
   pokemon: Pokemon = new Pokemon();
 
-  constructor(private userService: UserService, private pokemonService: PokemonService) { }
+  constructor(private userService: UserService, private pokemonService: PokemonService, private routeService: RouteService) { }
 
   doSignUp() {
     // POST /user
@@ -33,7 +34,7 @@ export class UserNewPageComponent {
       this.pokemonService.create(this.pokemon).then((data: Pokemon) => {
         this.pokemon = data;
         console.log("After create pokemon: ", this.pokemon);
-      })
+      });
     },
     err => {
       console.log(err);
@@ -42,5 +43,9 @@ export class UserNewPageComponent {
 
   setStarter(pokedexNumber: number) {
     this.pokemon.dexNum = pokedexNumber;
+  }
+
+  goBack() {
+    this.routeService.goToLogin();
   }
 }

@@ -21,9 +21,19 @@ nav {
   border-color: #E1735C;
 }
 
+.btn-secondary {
+  background: #BF8B5C;
+  border-color: #BF8B5C;
+}
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
   background-color: #D4614A;
   border-color: #D4614A;
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
+  background-color: #60401E;
+  border-color: #60401E;
 }
 
 body {

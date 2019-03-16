@@ -18,6 +18,9 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/admin">Admin</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/logs">Logs&amp;Activities</a>
+    </li>
   </ul>
-  <button class="btn btn-primary pull-right" (click)="logout()">Logout</button>
+  <button class="btn btn-primary btn-secondary pull-right" [class.btn-primary]="!admin" [class.btn-secondary]="admin" (click)="logout()">Logout</button>
 </nav>
