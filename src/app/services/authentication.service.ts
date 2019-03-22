@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { User } from "../models/user";
+import { Account } from "../models/account";
 import { UrlService } from "./url.service";
 
 @Injectable({
@@ -9,7 +9,7 @@ import { UrlService } from "./url.service";
 export class AuthenticationService {
   baseUrl = "";
   receiveEventHandler: any;
-  user: User;
+  account: Account;
   expiry: Date;
 
   constructor(private http: HttpClient, private urlService: UrlService) {}
@@ -24,14 +24,14 @@ export class AuthenticationService {
     return true;
   }
 
-  getUser(): User {
-    return this.user;
+  getUser(): Account {
+    return this.account;
   }
 
-  authenticate(username: string, password: string): Promise<User> {
+  authenticate(username: string, password: string): Promise<Account> {
     return new Promise((res, rej) => {
       // TODO: remove and implement fully
-      const user: User = {
+      const account: Account = {
         id: 1,
         username: "nickkong",
         password: "1234",
@@ -42,9 +42,9 @@ export class AuthenticationService {
         admin: true
       };
 
-      this.user = user;
+      this.account = account;
 
-      res(user);
+      res(account);
 
       // POST /user with username and password
 

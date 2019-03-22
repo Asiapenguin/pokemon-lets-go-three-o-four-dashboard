@@ -1,7 +1,7 @@
 import { Resource } from "./resource";
 
-export class User extends Resource {
-  static resourcePath = "/user";
+export class Account extends Resource {
+  static resourcePath = "/account";
 
   id: number;
   username: string;

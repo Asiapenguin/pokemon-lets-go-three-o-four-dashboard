@@ -3,10 +3,9 @@ import { LoginPageComponent } from "src/app/pages/login-page/login-page.componen
 import { HomePageComponent } from "src/app/pages/home-page/home-page.component";
 import { LayoutComponent } from "src/app/layout/layout.component";
 import { UserAuthenticationGuard } from "src/app/services/user-authentication.guard";
-import { UserNewPageComponent } from "src/app/pages/user-new-page/user-new-page.component";
 import { AdminPageComponent } from "src/app/pages/admin-page/admin-page.component";
-import { CanActivate } from "@angular/router/src/utils/preactivation";
 import { AdminAuthenticationGuard } from "src/app/services/admin-authentication.guard";
+import { AccountNewPageComponent } from "src/app/pages/account-new-page/account-new-page.component";
 
 export const userAuthenticatedRoutes: Routes = [
   {
@@ -60,14 +59,14 @@ export const routes: Routes = [
   },
   {
     path: "new",
-    component: UserNewPageComponent,
+    component: AccountNewPageComponent,
     data: {
-      title: "New User"
+      title: "New Account"
     }
   },
   {
     path: "**",
-    redirectTo: "home",
+    redirectTo: "login",
     pathMatch: "full"
   }
 ];

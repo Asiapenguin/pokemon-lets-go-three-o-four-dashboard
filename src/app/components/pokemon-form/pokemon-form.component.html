@@ -1,5 +1,5 @@
 <label>Add Pokemon(s)</label>
-<form #addForm="ngForm" (ngSubmit)="addPokemon()">
+<form #addForm="ngForm" (ngSubmit)="addPokemon($event)">
   <div class="row">
     <div class="col-4">
       <div class="input-group mb-3">
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="col-4">
-      <button class="btn btn-secondary" (click)="addPokemon()">Add</button>
+      <button type="submit" class="btn btn-secondary">Add</button>
     </div>
   </div>
 </form>
@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="col-4">
-      <button class="btn btn-secondary" (click)="editOwner()">Change</button>
+      <button type="submit" class="btn btn-secondary">Change</button>
     </div>
   </div>
 </form>
@@ -83,7 +83,7 @@
       </div>
     </div>
     <div class="col-4">
-      <button class="btn btn-secondary" (click)="deletePokemon()">
+      <button type="submit" class="btn btn-secondary">
         Delete
       </button>
     </div>
@@ -106,8 +106,8 @@
       </div>
     </div>
     <div class="col-4">
-      <button class="btn btn-secondary" (click)="addRandomNumPokemon()">
-        Delete
+      <button type="submit" class="btn btn-secondary">
+        Add
       </button>
     </div>
   </div>

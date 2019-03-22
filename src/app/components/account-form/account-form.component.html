@@ -1,0 +1,98 @@
+<label>Delete an account</label>
+<form #deleteForm="ngForm" (ngSubmit)="deleteAccount()">
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #deleteIdInput
+          type="text"
+          name="deleteId"
+          class="form-control"
+          required
+          [(ngModel)]="accountInfo.deleteAccId"
+          placeholder="Account ID"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary">Delete</button>
+    </div>
+  </div>
+</form>
+<label>Set balance to account</label>
+<form #setBalanceForm="ngForm" (ngSubmit)="setBalance()">
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #balanceIdInput
+          type="text"
+          name="balanceId"
+          class="form-control"
+          required
+          [(ngModel)]="accountInfo.balanceAccId"
+          placeholder="Account ID"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #balanceInput
+          type="text"
+          name="balance"
+          class="form-control"
+          required
+          [(ngModel)]="accountInfo.balance"
+          placeholder="Balance"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary">Set</button>
+    </div>
+  </div>
+</form>
+<label>Add item(s) to account</label>
+<form #addItemForm="ngForm" (ngSubmit)="addItem()">
+  <div class="row">
+    <div class="col-4">
+      <select
+        name="itemTypeId"
+        class="form-control"
+        [(ngModel)]="accountInfo.itemTypeId"
+      >
+        <option *ngFor="let item of items" [ngValue]="item.id">{{
+          item.name
+        }}</option>
+      </select>
+    </div>
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #addItemIdInput
+          type="text"
+          name="addItemId"
+          class="form-control"
+          required
+          [(ngModel)]="accountInfo.addItemAccId"
+          placeholder="Account ID"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <input
+          #itemQuantityInput
+          type="text"
+          name="itemQuantity"
+          class="form-control"
+          required
+          [(ngModel)]="accountInfo.itemQuantity"
+          placeholder="Quantity"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary">Add</button>
+    </div>
+  </div>
+</form>

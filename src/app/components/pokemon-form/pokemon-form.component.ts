@@ -28,7 +28,8 @@ export class PokemonFormComponent implements OnInit {
 
   ngOnInit() {}
 
-  addPokemon() {
+  addPokemon(event) {
+    console.log(event);
     const newPokemon = new Pokemon();
     newPokemon.dexNum = this.pokemonInfo.dexNum;
     // DISCUSSION: Can make an endpoint for this
