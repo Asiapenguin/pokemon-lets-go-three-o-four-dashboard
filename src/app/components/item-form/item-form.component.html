@@ -1,0 +1,55 @@
+<label>Remove an item from player</label>
+<form #deleteForm="ngForm" (ngSubmit)="deleteItem()">
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #deleteIdInput
+          type="text"
+          name="deleteId"
+          class="form-control"
+          required
+          [(ngModel)]="itemInfo.deleteId"
+          placeholder="Item ID"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary">Delete</button>
+    </div>
+  </div>
+</form>
+<label>Update cost of an item</label>
+<form #updateCostForm="ngForm" (ngSubmit)="updateCost()">
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #updateIdInput
+          type="text"
+          name="updateId"
+          class="form-control"
+          required
+          [(ngModel)]="itemInfo.updateId"
+          placeholder="Item ID"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input
+          #newCostInput
+          type="text"
+          name="newCost"
+          class="form-control"
+          required
+          [(ngModel)]="itemInfo.newCost"
+          placeholder="New Cost"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary">Update</button>
+    </div>
+  </div>
+</form>

@@ -1,30 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
+import { ResourceService } from "./resource.service";
+import { Item } from "../models/item";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService {
-
-  constructor() { }
-
-  getItems() {
-    return [
-      {
-        id: 1,
-        name: "Poke Ball"
-      },
-      {
-        id: 2,
-        name: "Great Ball"
-      },
-      {
-        id: 3,
-        name: "Ultra Ball"
-      },
-      {
-        id: 4,
-        name: "Max Revive"
-      }
-    ];
+export class ItemService extends ResourceService {
+  constructor(injector: Injector) {
+    super(injector, Item);
   }
 }

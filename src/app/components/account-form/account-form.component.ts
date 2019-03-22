@@ -4,6 +4,8 @@ import { AccountService } from "src/app/services/account.service";
 import { HttpClient } from "@angular/common/http";
 import { UrlService } from "src/app/services/url.service";
 import { ItemService } from "src/app/services/item.service";
+import { ListResponse } from "src/app/services/resource.service";
+import { Item } from "src/app/models/item";
 
 export class AccountInfo {
   public deleteAccId: number;
@@ -30,11 +32,17 @@ export class AccountFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.items = this.itemService.getItems();
+    this.itemService.list().then((data: ListResponse<Item>) => {
+      this.items = data.data;
+    },
+    err => {
+      console.log("AccountForm GET /item error: ", err);
+    });
   }
 
   deleteAccount() {
     const accountToBeDeleted = new Account();
+    accountToBeDeleted.id = this.accountInfo.deleteAccId;
     // DELETE: /account
     this.accountService.remove(accountToBeDeleted).then(
       data => {
@@ -72,6 +80,7 @@ export class AccountFormComponent implements OnInit {
   }
 
   addItem() {
+    // TODO
     console.log(
       this.accountInfo.itemTypeId,
       this.accountInfo.addItemAccId,
