@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from "src/app/services/item.service";
 import { Item } from "src/app/models/item";
 import { UrlService } from "src/app/services/url.service";
+import { HttpClient } from '@angular/common/http';
 
 export class ItemInfo {
   public deleteId: number;
@@ -18,7 +19,7 @@ export class ItemFormComponent implements OnInit {
 
   itemInfo: ItemInfo = new ItemInfo();
 
-  constructor(private itemService: ItemService, private urlService: UrlService) { }
+  constructor(private itemService: ItemService, private urlService: UrlService, private http: HttpClient) { }
 
   ngOnInit() {
   }
