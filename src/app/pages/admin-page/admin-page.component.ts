@@ -4,11 +4,6 @@ import { Pokemon } from "src/app/models/pokemon";
 import { AccountService } from "src/app/services/account.service";
 import { PokemonService } from "src/app/services/pokemon.service";
 
-export class OtherInfo {
-  public npcId: number;
-  public newReward: number;
-}
-
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
@@ -19,15 +14,10 @@ export class AdminPageComponent implements OnInit {
   newAccount: Account = new Account();
   editAccount: Account = new Account();
   pokemon: Pokemon = new Pokemon();
-  otherInfo: OtherInfo = new OtherInfo();
 
   constructor(private accountService: AccountService, private pokemonService: PokemonService) { }
 
   ngOnInit() {
-  }
-
-  updateReward() {
-
   }
 
   createAccount() {
@@ -52,7 +42,7 @@ export class AdminPageComponent implements OnInit {
 
   updateAccount() {
     // PUT: /account
-    this.accountService.create(this.editAccount).then((data: Account) => {
+    this.accountService.update(this.editAccount).then((data: Account) => {
       this.editAccount = data;
       console.log("After update account: ", this.editAccount);
     },
@@ -60,9 +50,4 @@ export class AdminPageComponent implements OnInit {
       console.log(err);
     });
   }
-
-  setStarter(pokedexNumber: number) {
-    this.pokemon.dexNum = pokedexNumber;
-  }
-
 }

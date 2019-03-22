@@ -17,6 +17,8 @@ import { LayoutComponent } from "./layout/layout.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { MainComponent } from "./layout/main/main.component";
 import { PokemonFormComponent } from "./components/pokemon-form/pokemon-form.component";
+import { NpcFormComponent } from './components/npc-form/npc-form.component';
+import { MapFormComponent } from './components/map-form/map-form.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { PokemonFormComponent } from "./components/pokemon-form/pokemon-form.com
     LayoutComponent,
     LoginPageComponent,
     MainComponent,
-    PokemonFormComponent
+    PokemonFormComponent,
+    NpcFormComponent,
+    MapFormComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],

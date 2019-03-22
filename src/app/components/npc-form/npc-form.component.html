@@ -1,0 +1,20 @@
+<label>Update NPC&apos;s Reward</label>
+<form #updateRewardForm="ngForm" (ngSubmit)="updateReward()">
+  <div class="row">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input #npcIdInput type="text" name="npcId" class="form-control" required [(ngModel)]="npcInfo.npcId"
+          placeholder="NPC ID" />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input #newRewardInput type="text" name="newReward" class="form-control" required
+          [(ngModel)]="npcInfo.newReward" placeholder="New Reward" />
+      </div>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary">Update</button>
+    </div>
+  </div>
+</form>

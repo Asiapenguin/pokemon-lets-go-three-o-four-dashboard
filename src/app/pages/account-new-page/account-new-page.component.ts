@@ -45,6 +45,10 @@ export class AccountNewPageComponent {
     });
   }
 
+  setStarter(pokedexNumber: number) {
+    this.pokemon.dexNum = pokedexNumber;
+  }
+
   goBack() {
     this.routeService.goToLogin();
   }

@@ -1,0 +1,25 @@
+<label>Set MapRegion Max Spawn</label>
+<form #updateMaxSpanForm="ngForm" (ngSubmit)="updateSpawnNumber()">
+  <div class="row">
+    <div class="col-4">
+      <select
+        name="mapRegionName"
+        class="form-control"
+        [(ngModel)]="mapRegionInfo.mapRegionName"
+      >
+        <option *ngFor="let mapRegion of mapRegions" [ngValue]="mapRegion.name">{{
+          mapRegion.name
+        }}</option>
+      </select>
+    </div>
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <input #maxSpawnInput type="text" name="maxSpawn" class="form-control" required
+          [(ngModel)]="mapRegionInfo.maxSpawnNum" placeholder="Max Spawn" />
+      </div>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary">Set</button>
+    </div>
+  </div>
+</form>
