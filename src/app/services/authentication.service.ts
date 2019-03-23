@@ -9,7 +9,16 @@ import { UrlService } from "./url.service";
 export class AuthenticationService {
   baseUrl = "";
   receiveEventHandler: any;
-  account: Account;
+  account: Account = {
+    id: 1,
+    username: "nickkong",
+    password: "1234",
+    location: "Viridian City",
+    badges_owned: 0,
+    characterName: "Asiapenguin",
+    gender: "Male",
+    admin: false
+  };
   expiry: Date;
 
   constructor(private http: HttpClient, private urlService: UrlService) {}
@@ -31,20 +40,7 @@ export class AuthenticationService {
   authenticate(username: string, password: string): Promise<Account> {
     return new Promise((res, rej) => {
       // TODO: remove and implement fully
-      const account: Account = {
-        id: 1,
-        username: "nickkong",
-        password: "1234",
-        location: "Pallet Town",
-        badges_owned: 0,
-        characterName: "Asiapenguin",
-        gender: "Male",
-        admin: false
-      };
-
-      this.account = account;
-
-      res(account);
+      res(this.account);
 
       // POST /user with username and password
 

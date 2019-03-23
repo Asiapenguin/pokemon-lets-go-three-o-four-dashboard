@@ -1,0 +1,26 @@
+<div *ngIf="currentMap">
+  <img [src]="currentMapSrc" />
+  You are at
+  {{ currentMap.name }}
+</div>
+<form #moveRegionForm="ngForm" class="mt-4" (ngSubmit)="moveRegion()">
+  <div class="row">
+    <div class="col-8">
+      <select
+        name="newRegion"
+        class="form-control"
+        [(ngModel)]="mapRegionInfo.newRegion"
+      >
+        <option
+          *ngFor="let mapRegion of mapRegions"
+          [ngValue]="mapRegion"
+          [selected]="currentMap?.name === mapRegion.name"
+          >{{ mapRegion.name }}</option
+        >
+      </select>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary">Move</button>
+    </div>
+  </div>
+</form>
