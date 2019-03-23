@@ -2,74 +2,17 @@
   <img class="mx-auto d-block" src="../../../assets/logo.png" />
   <div class="row">
     <div class="col-4 mx-auto">
-      <form
-        #signUpForm="ngForm"
-        class="form mb-2"
-        (ngSubmit)="doSignUp()"
-        autocomplete="off"
-      >
-        <app-account-new-form
-          [account]="account"
-          [pokemon]="pokemon"
-        ></app-account-new-form>
-        <div class="form-group">
-          <label for="starter">Choose your starter Pokemon</label><br />
-          <div class="p-2">
-            <img
-              class="starter mr-4"
-              src="../../../assets/pokemon-sprites/Bulbasaur.gif"
-              [class.selected]="pokemon.dexNum === 1"
-              (click)="setStarter(1)"
-            />
-            <img
-              class="starter mr-4"
-              src="../../../assets/pokemon-sprites/Charmander.gif"
-              [class.selected]="pokemon.dexNum === 4"
-              (click)="setStarter(4)"
-            />
-            <img
-              class="starter"
-              src="../../../assets/pokemon-sprites/Squirtle.gif"
-              [class.selected]="pokemon.dexNum === 7"
-              (click)="setStarter(7)"
-            />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="nickname">Nickname your Pokemon</label>
-          <div class="input-group mb-3 mx-auto">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="fas fa-paw"></i>
-              </span>
-            </div>
-            <input
-              #nicknameInput
-              type="text"
-              name="nickname"
-              id="nickname"
-              class="form-control"
-              required
-              [(ngModel)]="pokemon.nickname"
-              placeholder="Pokemon nickname"
-            />
-          </div>
+      <form #signUpForm="ngForm" class="form mb-2" (ngSubmit)="doSignUp()" autocomplete="off">
+        <app-account-new-starter-form [account]="account" [pokemon]="pokemon"></app-account-new-starter-form>
+        <div>
+          <button type="submit" class="btn btn-pokemon active btn-lg w-100">
+            Sign-Up
+          </button>
+          <button class="btn btn-pokemon active btn-lg w-100 mb-4" (click)="goBack()">
+            Cancel
+          </button>
         </div>
       </form>
-      <div>
-        <button
-          type="submit"
-          class="btn btn-pokemon active btn-lg w-100"
-        >
-          Sign-Up
-        </button>
-        <button
-          class="btn btn-pokemon active btn-lg w-100 mb-4"
-          (click)="goBack()"
-        >
-          Cancel
-        </button>
-      </div>
     </div>
   </div>
 </div>

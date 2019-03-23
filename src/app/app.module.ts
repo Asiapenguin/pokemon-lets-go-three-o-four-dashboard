@@ -19,6 +19,7 @@ import { MainComponent } from "./layout/main/main.component";
 import { PokemonFormComponent } from "./components/pokemon-form/pokemon-form.component";
 import { NpcFormComponent } from './components/npc-form/npc-form.component';
 import { MapFormComponent } from './components/map-form/map-form.component';
+import { AccountNewStarterFormComponent } from './components/account-new-starter-form/account-new-starter-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MapFormComponent } from './components/map-form/map-form.component';
     MainComponent,
     PokemonFormComponent,
     NpcFormComponent,
-    MapFormComponent
+    MapFormComponent,
+    AccountNewStarterFormComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],

@@ -19,7 +19,7 @@ export class AdminPageComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
   createAccount() {
     // POST /account
     this.accountService.create(this.newAccount).then((data: Account) => {
