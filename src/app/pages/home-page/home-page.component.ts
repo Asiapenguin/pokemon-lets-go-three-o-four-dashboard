@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { MapRegion } from 'src/app/models/mapRegion';
-import { MapRegionService } from 'src/app/services/map-region.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: "app-home-page",
