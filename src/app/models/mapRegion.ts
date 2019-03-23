@@ -7,4 +7,5 @@ export class MapRegion extends Resource {
   name: string;
   type: string;
   maxSpawnNumber: number;
+  buildings: any;
 }

@@ -21,10 +21,10 @@ export class AuthenticationService {
 
   isAdminAuthenticated() {
     // TODO: Check for username and password match, and admin privileges
-    return true;
+    return false;
   }
 
-  getUser(): Account {
+  getAccount(): Account {
     return this.account;
   }
 
@@ -39,7 +39,7 @@ export class AuthenticationService {
         badges_owned: 0,
         characterName: "Asiapenguin",
         gender: "Male",
-        admin: true
+        admin: false
       };
 
       this.account = account;
