@@ -6,12 +6,22 @@ import { UserAuthenticationGuard } from "src/app/services/user-authentication.gu
 import { AdminPageComponent } from "src/app/pages/admin-page/admin-page.component";
 import { AdminAuthenticationGuard } from "src/app/services/admin-authentication.guard";
 import { AccountNewPageComponent } from "src/app/pages/account-new-page/account-new-page.component";
+import { Role } from "src/app/models/role";
 
 export const userAuthenticatedRoutes: Routes = [
   {
     path: "",
     redirectTo: "home",
     pathMatch: "full"
+  },
+  {
+    path: "admin",
+    component: AdminPageComponent,
+    canActivate: [UserAuthenticationGuard],
+    data: {
+      title: "Admin",
+      role: [Role.Admin]
+    }
   },
   {
     path: "home",
@@ -22,20 +32,20 @@ export const userAuthenticatedRoutes: Routes = [
   }
 ];
 
-export const adminAuthenticatedRoutes: Routes = [
-  {
-    path: "",
-    redirectTo: "admin",
-    pathMatch: "full"
-  },
-  {
-    path: "admin",
-    component: AdminPageComponent,
-    data: {
-      title: "Admin"
-    }
-  }
-];
+// export const adminAuthenticatedRoutes: Routes = [
+//   {
+//     path: "",
+//     redirectTo: "admin",
+//     pathMatch: "full"
+//   },
+//   {
+//     path: "admin",
+//     component: AdminPageComponent,
+//     data: {
+//       title: "Admin"
+//     }
+//   }
+// ];
 
 export const routes: Routes = [
   {
@@ -44,12 +54,12 @@ export const routes: Routes = [
     children: userAuthenticatedRoutes,
     canActivate: [UserAuthenticationGuard]
   },
-  {
-    path: "",
-    component: LayoutComponent,
-    children: adminAuthenticatedRoutes,
-    canActivate: [AdminAuthenticationGuard]
-  },
+  // {
+  //   path: "",
+  //   component: LayoutComponent,
+  //   children: adminAuthenticatedRoutes,
+  //   canActivate: [AdminAuthenticationGuard]
+  // },
   {
     path: "login",
     component: LoginPageComponent,
@@ -66,7 +76,7 @@ export const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "login",
+    redirectTo: "home",
     pathMatch: "full"
   }
 ];

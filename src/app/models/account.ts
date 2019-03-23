@@ -1,4 +1,5 @@
 import { Resource } from "./resource";
+import { Role } from "./role";
 
 export class Account extends Resource {
   static resourcePath = "/account";
@@ -10,5 +11,5 @@ export class Account extends Resource {
   location: string;
   characterName: string;
   gender: string;
-  admin: boolean;
+  role: Role;
 }

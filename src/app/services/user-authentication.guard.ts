@@ -18,10 +18,16 @@ export class UserAuthenticationGuard implements CanActivate {
   ) {}
 
   canActivate(
-    next: ActivatedRouteSnapshot,
+    route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authenticationService.isUserAuthenticated()) {
+      const currentAccount = this.authenticationService.getAccount();
+      if (route.data.roles && route.data.roles.indexOf(currentAccount.role) === -1) {
+        // role not authorised so redirect to home page
+        this.router.navigate(['/login'], { replaceUrl: true });
+        return false;
+    }
       return true;
     }
     this.router.navigate(["/login"], { replaceUrl: true });

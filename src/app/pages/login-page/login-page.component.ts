@@ -7,6 +7,7 @@ import {
 } from "@angular/core";
 import { AuthenticationService } from "src/app/services/authentication.service";
 import { RouteService } from "src/app/services/route.service";
+import { Role } from "src/app/models/role";
 
 export class LoginData {
   public username: string;
@@ -44,7 +45,7 @@ export class LoginPageComponent implements AfterViewInit {
         user => {
           if (user) {
             console.log("User Data: ", user);
-            if (user.admin) {
+            if (user.role === Role.Admin) {
               this.routeService.goToAdmin();
             } else {
               this.routeService.goToHome();

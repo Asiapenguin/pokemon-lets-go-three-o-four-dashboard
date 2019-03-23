@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { HeaderService } from "src/app/services/header.service";
 import { AuthenticationService } from "src/app/services/authentication.service";
 import { RouteService } from "src/app/services/route.service";
+import { Role } from "src/app/models/role";
 
 @Component({
   selector: "app-header",
@@ -25,11 +26,9 @@ export class HeaderComponent implements OnInit {
   }
 
   checkAdminPrivileges() {
-    const user = this.authenticationService.getAccount();
-    if (user.admin) {
-      return true;
-    }
-    return false;
+    const account = this.authenticationService.getAccount();
+
+    return account && account.role === Role.Admin;
   }
 
   logout() {
