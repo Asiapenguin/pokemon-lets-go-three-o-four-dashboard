@@ -32,7 +32,7 @@ export class AccountFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.itemService.list().then((data: ListResponse<Item>) => {
+    this.itemService.findAll().get().then((data: ListResponse<Item>) => {
       this.items = data.data;
     },
     err => {

@@ -7,7 +7,7 @@ import { UrlService } from "./services/url.service";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  endpoint = "";
+  endpoint = "http://localhost:3000";
 
   constructor(private urlService: UrlService) {
     this.urlService.setEndpoint(this.endpoint);

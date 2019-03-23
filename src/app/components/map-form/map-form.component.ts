@@ -23,7 +23,7 @@ export class MapFormComponent implements OnInit {
   constructor(private mapRegionService: MapRegionService, private urlService: UrlService, private http: HttpClient) { }
 
   ngOnInit() {
-    this.mapRegionService.list().then((data: ListResponse<MapRegion>) => {
+    this.mapRegionService.findAll().get().then((data: ListResponse<MapRegion>) => {
       this.mapRegions = data.data;
     },
     err => {

@@ -1,3 +1,29 @@
-<p>home page works</p>
-
-<img [src]="currentMapSrc">
+<div class="row">
+  <div class="col-6">
+    <div>
+      <img [src]="currentMapSrc" />
+      You are at
+      {{ currentMapName }}
+    </div>
+    <form #moveRegionForm="ngForm" class="mt-4" (ngSubmit)="moveRegion()">
+      <div class="row">
+        <div class="col-8">
+          <select
+            name="newRegion"
+            class="form-control"
+            [(ngModel)]="mapRegionInfo.newRegion"
+          >
+            <option
+              *ngFor="let mapRegion of mapRegions"
+              [ngValue]="mapRegion.name"
+              >{{ mapRegion.name }}</option
+            >
+          </select>
+        </div>
+        <div class="col-4">
+          <button type="submit" class="btn btn-secondary">Move</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
