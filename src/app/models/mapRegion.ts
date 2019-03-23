@@ -1,4 +1,5 @@
 import { Resource } from "./resource";
+import { Building } from "./building";
 
 export class MapRegion extends Resource {
   static resourcePath = "/mapRegion";
@@ -7,5 +8,5 @@ export class MapRegion extends Resource {
   name: string;
   type: string;
   maxSpawnNumber: number;
-  buildings: any;
+  buildings: Building[];
 }

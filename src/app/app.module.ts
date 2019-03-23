@@ -21,6 +21,9 @@ import { NpcFormComponent } from './components/npc-form/npc-form.component';
 import { MapFormComponent } from './components/map-form/map-form.component';
 import { AccountNewStarterFormComponent } from './components/account-new-starter-form/account-new-starter-form.component';
 import { MapMoveComponent } from "./components/map-move/map-move.component";
+import { PokemonCenterComponent } from "./components/pokemon-center/pokemon-center.component";
+import { PokemartComponent } from "./components/pokemart/pokemart.component";
+import { CatchPokemonComponent } from "./components/catch-pokemon/catch-pokemon.component";
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { MapMoveComponent } from "./components/map-move/map-move.component";
     NpcFormComponent,
     MapFormComponent,
     AccountNewStarterFormComponent,
-    MapMoveComponent
+    MapMoveComponent,
+    PokemonCenterComponent,
+    PokemartComponent,
+    CatchPokemonComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],
