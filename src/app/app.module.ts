@@ -26,6 +26,7 @@ import { PokemartComponent } from "./components/pokemart/pokemart.component";
 import { CatchPokemonComponent } from "./components/catch-pokemon/catch-pokemon.component";
 import { SaleItemComponent } from './components/sale-item/sale-item.component';
 import { PokedexPageComponent } from './pages/pokedex-page/pokedex-page.component';
+import { BattleComponent } from './components/battle/battle.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { PokedexPageComponent } from './pages/pokedex-page/pokedex-page.componen
     PokemartComponent,
     CatchPokemonComponent,
     SaleItemComponent,
-    PokedexPageComponent
+    PokedexPageComponent,
+    BattleComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],

@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { MapRegion } from 'src/app/models/mapRegion';
 import { Account } from 'src/app/models/account';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { NpcService } from 'src/app/services/npc.service';
+import { Npc } from 'src/app/models/npc';
+import { ListResponse } from 'src/app/services/resource.service';
 
 @Component({
   selector: "app-home-page",
@@ -18,11 +21,18 @@ export class HomePageComponent implements OnInit {
 
   currentMap: MapRegion;
   currentAccount: Account;
+  currentTrainers = [];
+  currentGymLeaders = [];
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService, private npcService: NpcService) {}
 
   ngOnInit() {
     this.currentAccount = this.authenticationService.getAccount();
+  }
+
+  setBalance(balance: number) {
+    this.currentAccount.balance = balance;
+    console.log("Set balance to: ", balance);
   }
 
   setCurrentRegion(mapRegion: MapRegion) {
@@ -41,10 +51,8 @@ export class HomePageComponent implements OnInit {
     }
     if (mapRegion.buildings.some(building => building.type === "Gym")) {
       this.gym = true;
-      this.battle = true;
     } else {
       this.gym = false;
-      this.battle = false;
     }
     if (mapRegion.type === "Forest" || mapRegion.type === "Path") {
       this.catch = true;
@@ -52,6 +60,38 @@ export class HomePageComponent implements OnInit {
       this.catch = false;
     }
 
-    // TODO: Check if there are npc in currentMap and set battle to true
+    this.getNpcs().then((data: Npc[]) => {
+      if (data.length > 0) {
+        this.battle = true;
+        this.processNpcs(data);
+      } else {
+        this.battle = false;
+        this.currentGymLeaders = [];
+        this.currentTrainers = [];
+      }
+    })
+  }
+
+  getNpcs() {
+    return new Promise((res, rej) => {
+      this.npcService.findWhere("locatedAt", this.currentMap.name).get().then((data: ListResponse<Npc>) => {
+        res(data.data);
+      },
+      err => {
+        console.log("BattleComponent GET /npc?locatedAt= error: ", err);
+      })
+    })
+  }
+
+  processNpcs(data: Npc[]) {
+    this.currentTrainers = [];
+    this.currentGymLeaders = [];
+    for (let i = 0 ; i < data.length ; i++) {
+      if (data[i].role === "Trainer") {
+        this.currentTrainers.push(data[i]);
+      }  else {
+        this.currentGymLeaders.push(data[i]);
+      }
+    }
   }
 }

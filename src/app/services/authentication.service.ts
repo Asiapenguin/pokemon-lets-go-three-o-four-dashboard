@@ -13,7 +13,7 @@ export class AuthenticationService {
     id: 1,
     username: "nickkong",
     password: "1234",
-    location: "Viridian City",
+    location: "Viridian Forest",
     badges_owned: 0,
     characterName: "Asiapenguin",
     gender: "Male",

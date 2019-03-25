@@ -1,8 +1,9 @@
 <div class="row">
   <div class="col-6">
+    <h4>Your balance is {{ currentAccount.balance }}</h4>
     <app-map-move (newRegion)="setCurrentRegion($event)"></app-map-move>
     <div *ngIf="pokemart">
-      <app-pokemart [currentAccount]="currentAccount"></app-pokemart>
+      <app-pokemart [currentAccount]="currentAccount" (newBalance)="setBalance($event)"></app-pokemart>
     </div>
     <div *ngIf="!pokemart">
       There is no Pokemart in this location. Move to somewhere else to buy items!
@@ -21,6 +22,13 @@
     <div *ngIf="!catch">
       No Pokemon spawn in this location. Move to somewhere else to catch wild Pokemon!
     </div>
-    <div *ngIf="battle">Battle Component with Gym Leader if applicable</div>
+    <div *ngIf="battle">
+      <app-battle [currentAccount]="currentAccount" [currentMap]="currentMap" [gym]="gym"
+        [currentTrainers]="currentTrainers" [currentGymLeaders]="currentGymLeaders" (newBalance)="setBalance($event)">
+      </app-battle>
+    </div>
+    <div *ngIf="!battle">
+      There are no battles in this location. Move to somewehre else to battle other trainers or gym leaders!
+    </div>
   </div>
 </div>
