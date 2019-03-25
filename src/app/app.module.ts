@@ -24,6 +24,7 @@ import { MapMoveComponent } from "./components/map-move/map-move.component";
 import { PokemonCenterComponent } from "./components/pokemon-center/pokemon-center.component";
 import { PokemartComponent } from "./components/pokemart/pokemart.component";
 import { CatchPokemonComponent } from "./components/catch-pokemon/catch-pokemon.component";
+import { SaleItemComponent } from './components/sale-item/sale-item.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CatchPokemonComponent } from "./components/catch-pokemon/catch-pokemon.
     MapMoveComponent,
     PokemonCenterComponent,
     PokemartComponent,
-    CatchPokemonComponent
+    CatchPokemonComponent,
+    SaleItemComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],

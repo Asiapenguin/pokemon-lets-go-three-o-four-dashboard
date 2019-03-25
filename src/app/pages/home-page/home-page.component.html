@@ -2,7 +2,7 @@
   <div class="col-6">
     <app-map-move (newRegion)="setCurrentRegion($event)"></app-map-move>
     <div *ngIf="pokemart">
-      <app-pokemart></app-pokemart>
+      <app-pokemart [currentAccount]="currentAccount"></app-pokemart>
     </div>
     <div *ngIf="pokemonCenter">
       <app-pokemon-center></app-pokemon-center>

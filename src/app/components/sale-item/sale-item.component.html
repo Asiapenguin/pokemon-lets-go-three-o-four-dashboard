@@ -1,0 +1,14 @@
+<td>
+  <img [src]="saleItemSrc">
+  {{ saleItem.name }}
+</td>
+<td>{{ saleItem.cost }}</td>
+<td>
+  <i class="fas fa-minus" (click)="decrementQuantity()"></i>
+  {{ currentQuantity }}
+  <i class="fas fa-plus" (click)="incrementQuantity()"></i>
+</td>
+<td>
+  <button class="btn btn-primary" [disabled]="!haveEnoughBalance || currentQuantity === 0"
+    (click)="makePurchase()">Buy</button>
+</td>

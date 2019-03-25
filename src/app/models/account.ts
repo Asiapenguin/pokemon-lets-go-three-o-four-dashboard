@@ -10,5 +10,6 @@ export class Account extends Resource {
   location: string;
   characterName: string;
   gender: string;
+  balance: number;
   admin: boolean;
 }

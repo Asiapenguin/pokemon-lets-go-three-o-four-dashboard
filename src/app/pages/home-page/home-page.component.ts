@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MapRegion } from 'src/app/models/mapRegion';
+import { Account } from 'src/app/models/account';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: "app-home-page",
@@ -15,10 +17,13 @@ export class HomePageComponent implements OnInit {
   catch = false;
 
   currentMap: MapRegion;
+  currentAccount: Account;
 
-  constructor() {}
+  constructor(private authenticationService: AuthenticationService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.currentAccount = this.authenticationService.getAccount();
+  }
 
   setCurrentRegion(mapRegion: MapRegion) {
 

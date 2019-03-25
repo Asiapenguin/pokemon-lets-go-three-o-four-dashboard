@@ -17,6 +17,7 @@ export class AuthenticationService {
     badges_owned: 0,
     characterName: "Asiapenguin",
     gender: "Male",
+    balance: 2000,
     admin: false
   };
   expiry: Date;
