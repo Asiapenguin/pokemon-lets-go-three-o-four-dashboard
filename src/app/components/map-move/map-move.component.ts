@@ -70,8 +70,9 @@ export class MapMoveComponent implements OnInit {
         (mapRegion: MapRegion) => {
           this.currentAccount.location = this.mapRegionInfo.newRegion.name;
           // PATCH: /account
+          console.log(this.currentAccount)
           this.accountService.patch(this.currentAccount).then(updatedAccount => {
-            console.log("moveRegion", mapRegion);
+            // console.log("moveRegion", mapRegion);
             this.currentMap = this.mapRegionInfo.newRegion;
             this.currentMapSrc = this.getMapSrc(this.currentMap.name);
             this.newRegion.emit(mapRegion);

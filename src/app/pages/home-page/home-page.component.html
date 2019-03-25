@@ -4,13 +4,22 @@
     <div *ngIf="pokemart">
       <app-pokemart [currentAccount]="currentAccount"></app-pokemart>
     </div>
+    <div *ngIf="!pokemart">
+      There is no Pokemart in this location. Move to somewhere else to buy items!
+    </div>
     <div *ngIf="pokemonCenter">
       <app-pokemon-center></app-pokemon-center>
+    </div>
+    <div *ngIf="!pokemonCenter">
+      There is no Pokemon Center in this location. Move to somewhere else to heal your Pokemon!
     </div>
   </div>
   <div class="col-6">
     <div *ngIf="catch">
-      <app-catch-pokemon></app-catch-pokemon>
+      <app-catch-pokemon [currentMap]="currentMap"></app-catch-pokemon>
+    </div>
+    <div *ngIf="!catch">
+      No Pokemon spawn in this location. Move to somewhere else to catch wild Pokemon!
     </div>
     <div *ngIf="battle">Battle Component with Gym Leader if applicable</div>
   </div>

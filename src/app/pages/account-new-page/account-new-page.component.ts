@@ -4,6 +4,8 @@ import { Account } from "src/app/models/account";
 import { Pokemon } from "src/app/models/pokemon";
 import { AccountService } from "src/app/services/account.service";
 import { PokemonService } from "src/app/services/pokemon.service";
+import { ItemService } from 'src/app/services/item.service';
+import { Item } from 'src/app/models/item';
 
 export class SignUpData {
   public username: string;
@@ -23,7 +25,7 @@ export class AccountNewPageComponent {
   account: Account = new Account();
   pokemon: Pokemon = new Pokemon();
 
-  constructor(private accountService: AccountService, private pokemonService: PokemonService, private routeService: RouteService) { }
+  constructor(private accountService: AccountService, private pokemonService: PokemonService, private routeService: RouteService, private itemService: ItemService) { }
 
   doSignUp() {
     // POST /account
@@ -39,6 +41,21 @@ export class AccountNewPageComponent {
       err => {
         console.log(err);
       });
+      
+      const promiseArr = [];
+      for (let i = 0 ; i < 20 ; i++) {
+        const item = new Item();
+        item.playableId = this.account.id;
+        item.type = "Poke Ball";
+        promiseArr.push(this.itemService.create(item));
+      }
+
+      Promise.all(promiseArr).then(data => {
+        console.log("AccountNewPage Promise.all create 20 Poke Balls: ", data);
+      },
+      err => {
+        console.log("AccountNewPage Promise.all error: ", err);
+      })
     },
     err => {
       console.log(err);

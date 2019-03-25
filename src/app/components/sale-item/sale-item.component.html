@@ -1,8 +1,8 @@
 <td>
   <img [src]="saleItemSrc">
-  {{ saleItem.name }}
+  {{ saleItemType.name }}
 </td>
-<td>{{ saleItem.cost }}</td>
+<td>{{ saleItemType.cost }}</td>
 <td>
   <i class="fas fa-minus" (click)="decrementQuantity()"></i>
   {{ currentQuantity }}

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Item } from 'src/app/models/item';
+import { ItemType } from 'src/app/models/itemType';
 
 export class ItemPurchase {
-  public item: Item;
+  public itemType: ItemType;
   public quantity: number;
 }
 
@@ -13,7 +13,7 @@ export class ItemPurchase {
 })
 export class SaleItemComponent implements OnInit {
 
-  @Input() saleItem: Item;
+  @Input() saleItemType: ItemType;
   @Input() balance: number;
   @Output() purchase = new EventEmitter<ItemPurchase>();
 
@@ -25,7 +25,7 @@ export class SaleItemComponent implements OnInit {
 
   ngOnInit() {
     this.currentQuantity = 0;
-    this.setSaleItemSrc(this.saleItem.name);
+    this.setSaleItemSrc(this.saleItemType.name);
   }
 
   private setSaleItemSrc(name: string) {
@@ -45,12 +45,12 @@ export class SaleItemComponent implements OnInit {
   }
 
   private checkBalance() {
-    this.haveEnoughBalance = this.balance >= this.currentQuantity * this.saleItem.cost;
+    this.haveEnoughBalance = this.balance >= this.currentQuantity * this.saleItemType.cost;
   }
 
   makePurchase() {
     const itemPurchase = new ItemPurchase();
-    itemPurchase.item = this.saleItem;
+    itemPurchase.itemType = this.saleItemType;
     itemPurchase.quantity = this.currentQuantity;
     if (itemPurchase.quantity > 0) {
       this.purchase.emit(itemPurchase);

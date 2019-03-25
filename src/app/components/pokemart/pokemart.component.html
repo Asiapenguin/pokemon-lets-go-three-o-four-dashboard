@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let saleItem of saleItems" app-sale-item [saleItem]="saleItem" [balance]="currentAccountBalance"
+        <tr *ngFor="let saleItemType of saleItemTypes" app-sale-item [saleItemType]="saleItemType" [balance]="currentAccountBalance"
           (purchase)="purchase($event)">
         </tr>
       </tbody>

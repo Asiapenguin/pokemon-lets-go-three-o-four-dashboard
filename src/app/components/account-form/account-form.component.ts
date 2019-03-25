@@ -3,9 +3,9 @@ import { Account } from "src/app/models/account";
 import { AccountService } from "src/app/services/account.service";
 import { HttpClient } from "@angular/common/http";
 import { UrlService } from "src/app/services/url.service";
-import { ItemService } from "src/app/services/item.service";
+import { ItemTypeService } from "src/app/services/itemtype.service";
 import { ListResponse } from "src/app/services/resource.service";
-import { Item } from "src/app/models/item";
+import { ItemType } from "src/app/models/itemType";
 
 export class AccountInfo {
   public deleteAccId: number;
@@ -22,21 +22,21 @@ export class AccountInfo {
 })
 export class AccountFormComponent implements OnInit {
   accountInfo: AccountInfo = new AccountInfo();
-  items = [];
+  itemsTypes = [];
 
   constructor(
     private accountService: AccountService,
-    private itemService: ItemService,
+    private itemTypeService: ItemTypeService,
     private urlService: UrlService,
     private http: HttpClient
   ) {}
 
   ngOnInit() {
-    this.itemService.findAll().get().then((data: ListResponse<Item>) => {
-      this.items = data.data;
+    this.itemTypeService.findAll().get().then((data: ListResponse<ItemType>) => {
+      this.itemsTypes = data.data;
     },
     err => {
-      console.log("AccountForm GET /item error: ", err);
+      console.log("AccountForm GET /itemType error: ", err);
     });
   }
 

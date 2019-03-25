@@ -1,7 +1,7 @@
 import { Resource } from "./resource";
 
 export class Account extends Resource {
-  static resourcePath = "/account";
+  static resourcePath = "/user";
 
   id: number;
   username: string;

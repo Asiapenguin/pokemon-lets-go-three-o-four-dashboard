@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Account } from 'src/app/models/account';
-import { ItemService } from 'src/app/services/item.service';
-import { Item } from 'src/app/models/item';
+import { ItemTypeService } from 'src/app/services/itemtype.service';
+import { ItemType } from 'src/app/models/itemType';
 import { ListResponse } from 'src/app/services/resource.service';
 import { ItemPurchase } from '../sale-item/sale-item.component';
 import { AccountService } from 'src/app/services/account.service';
@@ -15,15 +15,15 @@ export class PokemartComponent implements OnInit {
 
   @Input() currentAccount: Account;
   currentAccountBalance: number;
-  saleItems = []
+  saleItemTypes = []
 
-  constructor(private itemService: ItemService, private accountService: AccountService) { }
+  constructor(private itemTypeService: ItemTypeService, private accountService: AccountService) { }
 
   ngOnInit() {
     this.currentAccountBalance = this.currentAccount.balance;
 
-    this.itemService.findAll().get().then((data: ListResponse<Item>) => {
-      this.saleItems = data.data;
+    this.itemTypeService.findAll().get().then((data: ListResponse<ItemType>) => {
+      this.saleItemTypes = data.data;
     },
     err => {
       console.log("AccountForm GET /item error: ", err);
@@ -31,7 +31,7 @@ export class PokemartComponent implements OnInit {
   }
 
   purchase(itemPurchase: ItemPurchase) {
-    const cost = itemPurchase.item.cost * itemPurchase.quantity;
+    const cost = itemPurchase.itemType.cost * itemPurchase.quantity;
     const newBalance = this.currentAccountBalance - cost;
 
     const editAccount = this.currentAccount;
@@ -48,7 +48,7 @@ export class PokemartComponent implements OnInit {
     const promiseArr = [];
     for (let i = 0 ; i < itemPurchase.quantity ; i++) {
       // POST: /item
-      promiseArr.push(this.itemService.create(itemPurchase.item));
+      promiseArr.push(this.itemTypeService.create(itemPurchase.itemType));
     }
 
     Promise.all(promiseArr).then(data => {

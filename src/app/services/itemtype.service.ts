@@ -1,12 +1,12 @@
 import { Injectable, Injector } from '@angular/core';
 import { ResourceService } from "./resource.service";
-import { Item } from '../models/item';
+import { ItemType } from "../models/itemType";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService extends ResourceService {
+export class ItemTypeService extends ResourceService {
   constructor(injector: Injector) {
-    super(injector, Item);
+    super(injector, ItemType);
   }
 }

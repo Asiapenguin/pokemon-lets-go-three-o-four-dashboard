@@ -4,6 +4,7 @@ export class Item extends Resource {
   static resourcePath = "/item";
 
   id: number;
-  name: string;
-  cost: number;
+  type: string;
+  playableId: number;
+  used: boolean;
 }

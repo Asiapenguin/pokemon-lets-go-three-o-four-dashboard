@@ -1,0 +1,13 @@
+div.selected {
+    outline: solid;
+    outline-color: #E1735C; 
+}
+
+.ball {
+    cursor: pointer;
+}
+
+.ball:disabled {
+    color: lightgray;
+    cursor: default;
+}
