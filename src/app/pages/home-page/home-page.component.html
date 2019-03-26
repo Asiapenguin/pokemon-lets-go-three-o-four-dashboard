@@ -1,6 +1,10 @@
 <div class="row">
-  <div class="col-6">
+  <div class="col">
     <h4>Your balance is {{ currentAccount.balance }}</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
     <app-map-move (newRegion)="setCurrentRegion($event)"></app-map-move>
     <div *ngIf="pokemart">
       <app-pokemart [currentAccount]="currentAccount" (newBalance)="setBalance($event)"></app-pokemart>
@@ -24,7 +28,7 @@
     </div>
     <div *ngIf="battle">
       <app-battle [currentAccount]="currentAccount" [currentMap]="currentMap" [gym]="gym"
-        [currentTrainers]="currentTrainers" [currentGymLeaders]="currentGymLeaders" (newBalance)="setBalance($event)">
+        [currentNpcs]="currentNpcs" (newBalance)="setBalance($event)">
       </app-battle>
     </div>
     <div *ngIf="!battle">

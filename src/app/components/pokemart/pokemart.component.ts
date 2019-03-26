@@ -15,7 +15,7 @@ export class PokemartComponent implements OnInit {
 
   @Input() currentAccount: Account;
   @Output() newBalance = new EventEmitter<number>();
-  saleItemTypes = []
+  saleItemTypes = [];
 
   constructor(private itemTypeService: ItemTypeService, private accountService: AccountService) { }
 
@@ -42,8 +42,8 @@ export class PokemartComponent implements OnInit {
     },
     err => {
       console.log("PokemartComponent PATCH /account new balance error: ", err);
-    })
-    
+    });
+
     const promiseArr = [];
     for (let i = 0 ; i < itemPurchase.quantity ; i++) {
       // POST: /item
@@ -55,7 +55,7 @@ export class PokemartComponent implements OnInit {
     },
     err => {
       console.log("PokemartComponent Promise.all POST /item error: ", err);
-    })
+    });
 
   }
 }

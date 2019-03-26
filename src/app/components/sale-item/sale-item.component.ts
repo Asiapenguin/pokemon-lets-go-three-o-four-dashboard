@@ -7,7 +7,7 @@ export class ItemPurchase {
 }
 
 @Component({
-  selector: '[app-sale-item]',
+  selector: 'app-sale-item, [app-sale-item]',
   templateUrl: './sale-item.component.html',
   styleUrls: ['./sale-item.component.scss']
 })

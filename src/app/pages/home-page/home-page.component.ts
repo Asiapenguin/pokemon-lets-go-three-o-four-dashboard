@@ -21,8 +21,9 @@ export class HomePageComponent implements OnInit {
 
   currentMap: MapRegion;
   currentAccount: Account;
-  currentTrainers = [];
-  currentGymLeaders = [];
+  currentNpcs = [];
+  // currentTrainers = [];
+  // currentGymLeaders = [];
 
   constructor(private authenticationService: AuthenticationService, private npcService: NpcService) {}
 
@@ -63,35 +64,38 @@ export class HomePageComponent implements OnInit {
     this.getNpcs().then((data: Npc[]) => {
       if (data.length > 0) {
         this.battle = true;
-        this.processNpcs(data);
+        this.currentNpcs = data;
+        // this.processNpcs(data);
       } else {
         this.battle = false;
-        this.currentGymLeaders = [];
-        this.currentTrainers = [];
+        this.currentNpcs = [];
+        // this.currentGymLeaders = [];
+        // this.currentTrainers = [];
       }
-    })
+    });
   }
 
   getNpcs() {
     return new Promise((res, rej) => {
+      // GET /npc?locatedAt=
       this.npcService.findWhere("locatedAt", this.currentMap.name).get().then((data: ListResponse<Npc>) => {
         res(data.data);
       },
       err => {
-        console.log("BattleComponent GET /npc?locatedAt= error: ", err);
-      })
-    })
+        console.log("HomePageComponent GET /npc?locatedAt= error: ", err);
+      });
+    });
   }
 
-  processNpcs(data: Npc[]) {
-    this.currentTrainers = [];
-    this.currentGymLeaders = [];
-    for (let i = 0 ; i < data.length ; i++) {
-      if (data[i].role === "Trainer") {
-        this.currentTrainers.push(data[i]);
-      }  else {
-        this.currentGymLeaders.push(data[i]);
-      }
-    }
-  }
+  // processNpcs(data: Npc[]) {
+  //   this.currentTrainers = [];
+  //   this.currentGymLeaders = [];
+  //   for (let i = 0 ; i < data.length ; i++) {
+  //     if (data[i].role === "Trainer") {
+  //       this.currentTrainers.push(data[i]);
+  //     }  else {
+  //       this.currentGymLeaders.push(data[i]);
+  //     }
+  //   }
+  // }
 }

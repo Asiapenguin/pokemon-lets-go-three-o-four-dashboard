@@ -1,0 +1,8 @@
+<td>{{ trainer.name }}</td>
+<td>{{ trainer.reward }}</td>
+<td>
+  <button class="btn btn-primary" (click)="getResult()" [disabled]="result === 'WIN'">
+    Battle
+  </button>
+  <span class="ml-2">{{ result }}</span>
+</td>

@@ -27,6 +27,10 @@ import { CatchPokemonComponent } from "./components/catch-pokemon/catch-pokemon.
 import { SaleItemComponent } from './components/sale-item/sale-item.component';
 import { PokedexPageComponent } from './pages/pokedex-page/pokedex-page.component';
 import { BattleComponent } from './components/battle/battle.component';
+import { BattleTrainerComponent } from "./components/battle/battle-trainer/battle-trainer.component";
+import { TrainerItemComponent } from "./components/battle/battle-trainer/trainer-item/trainer-item.component";
+import { BattleGymLeaderComponent } from "./components/battle/battle-gym-leader/battle-gym-leader.component";
+import { GymLeaderItemComponent } from "./components/battle/battle-gym-leader/gym-leader-item/gym-leader-item.component";
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { BattleComponent } from './components/battle/battle.component';
     CatchPokemonComponent,
     SaleItemComponent,
     PokedexPageComponent,
-    BattleComponent
+    BattleComponent,
+    BattleTrainerComponent,
+    TrainerItemComponent,
+    BattleGymLeaderComponent,
+    GymLeaderItemComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],

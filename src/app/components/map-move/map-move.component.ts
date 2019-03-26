@@ -78,7 +78,7 @@ export class MapMoveComponent implements OnInit {
             this.newRegion.emit(mapRegion);
           },
           err => {
-            console.log("MapMoveComponent PATCH /account error: ", err);
+            console.log("MapMoveComponent PUT /account error: ", err);
           });
         },
         err => {
