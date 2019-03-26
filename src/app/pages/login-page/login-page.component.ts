@@ -38,6 +38,7 @@ export class LoginPageComponent implements AfterViewInit {
   // Emit event to login output
   doLogin() {
     const sanitizedLoginData = this.sanitize(this.loginData);
+    console.log("Login Data: ", sanitizedLoginData);
     this.authenticationService
       .authenticate(sanitizedLoginData.username, sanitizedLoginData.password)
       .then(

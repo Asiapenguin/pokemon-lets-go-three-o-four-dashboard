@@ -9,17 +9,18 @@ import { UrlService } from "./url.service";
 export class AuthenticationService {
   baseUrl = "";
   receiveEventHandler: any;
-  account: Account = {
-    id: 1,
-    username: "nickkong",
-    password: "1234",
-    location: "Viridian Forest",
-    badges_owned: 0,
-    characterName: "Asiapenguin",
-    gender: "Male",
-    balance: 2000,
-    admin: false
-  };
+  // account: Account = {
+  //   id: 1,
+  //   username: "nickkong",
+  //   password: "1234",
+  //   location: "Viridian Forest",
+  //   badges_owned: 0,
+  //   characterName: "Asiapenguin",
+  //   gender: "Male",
+  //   balance: 2000,
+  //   admin: false
+  // };
+  account: Account;
   expiry: Date;
 
   constructor(private http: HttpClient, private urlService: UrlService) {}
@@ -31,6 +32,9 @@ export class AuthenticationService {
 
   isAdminAuthenticated() {
     // TODO: Check for username and password match, and admin privileges
+    if (this.account.admin) {
+      return true
+    }
     return false;
   }
 
@@ -41,35 +45,31 @@ export class AuthenticationService {
   authenticate(username: string, password: string): Promise<Account> {
     return new Promise((res, rej) => {
       // TODO: remove and implement fully
-      res(this.account);
-
-      // POST /user with username and password
-
-      // this.http
-      //   .post(this.urlService.getEndpoint() + User.resourcePath, {
-      //     username: username,
-      //     password: password
-      //   })
-      //   .subscribe(
-      //     (data: User) => {
-      //       const user = this.user;
-      //       if (user) {
-      //         res(user);
-      //       } else {
-      //         rej('Invalid user');
-      //       }
-      //     },
-      //     err => {
-      //       this.logout();
-      //       if (err.status === 401 || err.status === 403) {
-      //         rej(err.statusText);
-      //       } else if (err.error) {
-      //         rej(err.error);
-      //       } else {
-      //         rej();
-      //       }
-      //     }
-      //   );
+      this.http
+        .post(this.urlService.getEndpoint() + "/authenticate", {
+          username: username,
+          password: password
+        })
+        .subscribe(
+          (data: Account) => {
+            this.account = data;
+            if (this.account) {
+              res(this.account);
+            } else {
+              rej('Invalid account');
+            }
+          },
+          err => {
+            this.logout();
+            if (err.status === 401 || err.status === 403) {
+              rej(err.statusText);
+            } else if (err.error) {
+              rej(err.error);
+            } else {
+              rej();
+            }
+          }
+        );
     });
   }
 

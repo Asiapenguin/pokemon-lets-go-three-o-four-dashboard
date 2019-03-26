@@ -33,7 +33,7 @@ export class MapMoveComponent implements OnInit {
   ngOnInit() {
     // Get location of user
     this.currentAccount = this.authenticationService.getAccount();
-    const currentMapName = this.currentAccount.location;
+    const currentMapName = this.currentAccount.locatedat;
     this.currentMapSrc = this.getMapSrc(currentMapName);
     // GET: /mapRegion/:name
     this.mapRegionService.get(currentMapName).then(
@@ -68,7 +68,7 @@ export class MapMoveComponent implements OnInit {
       // GET: /mapRegion/:name
       this.mapRegionService.get(this.mapRegionInfo.newRegion.name).then(
         (mapRegion: MapRegion) => {
-          this.currentAccount.location = this.mapRegionInfo.newRegion.name;
+          this.currentAccount.locatedat = this.mapRegionInfo.newRegion.name;
           // PUT: /user
           console.log(this.currentAccount)
           this.accountService.update(this.currentAccount).then(updatedAccount => {

@@ -28,10 +28,6 @@ export class PokemartComponent implements OnInit {
     });
   }
 
-  ngOnChanges(changes) {
-    // TODO: DOES NOT UPDATE THIS BALANCE WHEN BATTLES WON
-  }
-
   purchase(itemPurchase: ItemPurchase) {
     const cost = itemPurchase.itemType.cost * itemPurchase.quantity;
     const newBalance = this.currentAccount.balance - cost;

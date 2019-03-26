@@ -25,8 +25,9 @@ export class HeaderComponent implements OnInit {
   }
 
   checkAdminPrivileges() {
-    const user = this.authenticationService.getAccount();
-    if (user.admin) {
+    const account = this.authenticationService.getAccount();
+    console.log("HeaderComponent checkAdminPriv: ", account);
+    if (account.admin) {
       return true;
     }
     return false;
