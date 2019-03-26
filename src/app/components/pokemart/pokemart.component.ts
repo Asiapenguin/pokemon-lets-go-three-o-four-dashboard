@@ -3,8 +3,8 @@ import { Account } from 'src/app/models/account';
 import { ItemTypeService } from 'src/app/services/itemtype.service';
 import { ItemType } from 'src/app/models/itemType';
 import { ListResponse } from 'src/app/services/resource.service';
-import { ItemPurchase } from '../sale-item/sale-item.component';
 import { AccountService } from 'src/app/services/account.service';
+import { ItemPurchase } from './sale-item/sale-item.component';
 
 @Component({
   selector: 'app-pokemart',

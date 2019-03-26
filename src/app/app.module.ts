@@ -24,13 +24,13 @@ import { MapMoveComponent } from "./components/map-move/map-move.component";
 import { PokemonCenterComponent } from "./components/pokemon-center/pokemon-center.component";
 import { PokemartComponent } from "./components/pokemart/pokemart.component";
 import { CatchPokemonComponent } from "./components/catch-pokemon/catch-pokemon.component";
-import { SaleItemComponent } from './components/sale-item/sale-item.component';
 import { PokedexPageComponent } from './pages/pokedex-page/pokedex-page.component';
 import { BattleComponent } from './components/battle/battle.component';
 import { BattleTrainerComponent } from "./components/battle/battle-trainer/battle-trainer.component";
 import { TrainerItemComponent } from "./components/battle/battle-trainer/trainer-item/trainer-item.component";
 import { BattleGymLeaderComponent } from "./components/battle/battle-gym-leader/battle-gym-leader.component";
 import { GymLeaderItemComponent } from "./components/battle/battle-gym-leader/gym-leader-item/gym-leader-item.component";
+import { SaleItemComponent } from './components/pokemart/sale-item/sale-item.component';
 
 @NgModule({
   declarations: [
