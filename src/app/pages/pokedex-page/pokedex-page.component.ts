@@ -24,6 +24,9 @@ export class PokedexPageComponent implements OnInit {
         this.allSpecies = data.data;
         this.totalNumSpecies = this.allSpecies.length;
         console.log("PokedexComponent allSpecies: ", this.allSpecies);
+      },
+      err => {
+        console.log("PokedexComponent GET /species error: ", err);
       });
   }
 

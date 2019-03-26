@@ -1,10 +1,12 @@
 <div class="row">
   <div class="col">
     <h4>Pokedex</h4>
-    <span>You have caught {{ speciesCaught }} out of {{ totalNumSpecies }}</span>
+    <span
+      >You have caught {{ speciesCaught }} out of {{ totalNumSpecies }}</span
+    >
   </div>
 </div>
-<div class="row">
+<div *ngIf="allSpecies" class="row">
   <div class="col-sm-2 species-icon" *ngFor="let s of allSpecies">
     <img width="80%" height="80%" [src]="getSpeciesIconSrc(s.name)" /><br />
     <span
