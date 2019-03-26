@@ -2,3 +2,11 @@
   padding: 75px 25px 50px 25px;
   display: block;
 }
+
+.main-container {
+  margin: 0 auto;
+}
+
+.router-outlet-container {
+  will-change: position, transform, width;
+}

@@ -1,3 +1,23 @@
-<p>
-  pokedex-page works!
-</p>
+<div class="row">
+  <div class="col">
+    <h4>Pokedex</h4>
+    <span>You have caught {{ speciesCaught }} out of {{ totalNumSpecies }}</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2 species-icon" *ngFor="let s of allSpecies">
+    <img width="80%" height="80%" [src]="getSpeciesIconSrc(s.name)" /><br />
+    <span
+      class="badge badge-pill"
+      [ngStyle]="{ background: getColor(s.typei) }"
+      >{{ s.typei }}</span
+    >
+    <span
+      class="badge badge-pill"
+      *ngIf="s.typeii"
+      [ngStyle]="{ background: getColor(s.typeii) }"
+      >{{ s.typeii }}</span
+    ><br />
+    {{ s.name }}
+  </div>
+</div>

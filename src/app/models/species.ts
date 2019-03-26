@@ -5,7 +5,7 @@ export class Species extends Resource {
 
   id: number;
   name: string;
-  typeI: string;
-  typeII: string;
+  typei: string;
+  typeii: string;
   foundAt: string;
 }
