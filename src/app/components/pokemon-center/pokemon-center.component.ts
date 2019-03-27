@@ -34,7 +34,7 @@ export class PokemonCenterComponent implements OnInit {
       );
       for (let i = 0; i < fainted.length; i++) {
         const currentFainted = fainted[i];
-        fainted[i].status = "Active";
+        fainted[i].status = "Healthy";
         // PATCH: /pokemon ???
         promiseArr.push(this.pokemonService.update(currentFainted));
       }
@@ -60,6 +60,9 @@ export class PokemonCenterComponent implements OnInit {
         )
         .subscribe((data: ListResponse<Pokemon>) => {
           res(data.data);
+        },
+        err => {
+          rej(err);
         });
     });
   }

@@ -24,7 +24,7 @@ export class BattleGymLeaderComponent implements OnInit {
     if (win) {
       const newBalanceAccount = this.currentAccount;
       newBalanceAccount.balance += gymLeader.reward;
-      newBalanceAccount.badges_owned += 1;
+      newBalanceAccount.badgesowned += 1;
       this.newBalance.emit(newBalanceAccount.balance);
       // PUT /user
       this.accountService.update(newBalanceAccount).then(
@@ -36,23 +36,25 @@ export class BattleGymLeaderComponent implements OnInit {
         }
       );
     } else {
-      const faintedPokemon = this.currentPokemon.find(
+      const willFaintPokemon = this.currentPokemon.find(
         p => p.status === "Healthy"
       );
-      faintedPokemon.status = "Fainted";
-      // PUT /pokemon
-      this.pokemonService.update(faintedPokemon).then(
-        (data: Pokemon) => {
-          console.log(
-            `Pokemon ID ${
-              faintedPokemon.id
-            } has fainted from the battle: ${data}`
-          );
-        },
-        err => {
-          console.log("BattleGymLeaderComponent PUT /pokemon error: ", err);
-        }
-      );
+      if (willFaintPokemon) {
+        willFaintPokemon.status = "Fainted";
+        // PUT /pokemon
+        this.pokemonService.update(willFaintPokemon).then(
+          (data: Pokemon) => {
+            console.log(
+              `Pokemon ID ${
+                willFaintPokemon.id
+              } has fainted from the battle: ${data}`
+            );
+          },
+          err => {
+            console.log("BattleGymLeaderComponent PUT /pokemon error: ", err);
+          }
+        );
+      }
     }
   }
 }

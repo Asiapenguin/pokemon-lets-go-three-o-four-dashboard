@@ -7,6 +7,7 @@ import { AdminPageComponent } from "src/app/pages/admin-page/admin-page.componen
 import { AdminAuthenticationGuard } from "src/app/services/admin-authentication.guard";
 import { AccountNewPageComponent } from "src/app/pages/account-new-page/account-new-page.component";
 import { PokedexPageComponent } from 'src/app/pages/pokedex-page/pokedex-page.component';
+import { ProfilePageComponent } from "src/app/pages/profile-page/profile-page.component";
 
 export const userAuthenticatedRoutes: Routes = [
   {
@@ -26,6 +27,13 @@ export const userAuthenticatedRoutes: Routes = [
     component: PokedexPageComponent,
     data: {
       title: "Pokedex"
+    }
+  },
+  {
+    path: "profile",
+    component: ProfilePageComponent,
+    data: {
+      title: "Profile"
     }
   }
 ];

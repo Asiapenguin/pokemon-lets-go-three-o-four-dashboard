@@ -1,0 +1,13 @@
+<h4>Your Pokemon</h4>
+<label>Note: Fainted pokemon will have a red bar</label>
+<div class="row">
+  <div class="col-sm-2" *ngFor="let p of currentAccountPokemon">
+    <img
+      width="70%"
+      height="70%"
+      [src]="getPokemonIconSrc(p.name)"
+      [ngStyle]="{ 'border-color': getStatus(p) }"
+    /><br />
+    <span>{{ haveNickname(p) ? p.nickname : p.name }}</span>
+  </div>
+</div>

@@ -6,7 +6,7 @@ export class Account extends Resource {
   id: number;
   username: string;
   password: string;
-  badges_owned: number;
+  badgesowned: number;
   locatedat: string;
   characterName: string;
   gender: string;

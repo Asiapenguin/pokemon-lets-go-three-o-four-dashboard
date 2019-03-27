@@ -88,16 +88,4 @@ export class HomePageComponent implements OnInit {
       });
     });
   }
-
-  // processNpcs(data: Npc[]) {
-  //   this.currentTrainers = [];
-  //   this.currentGymLeaders = [];
-  //   for (let i = 0 ; i < data.length ; i++) {
-  //     if (data[i].role === "Trainer") {
-  //       this.currentTrainers.push(data[i]);
-  //     }  else {
-  //       this.currentGymLeaders.push(data[i]);
-  //     }
-  //   }
-  // }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Account } from "src/app/models/account";
+import { AuthenticationService } from "src/app/services/authentication.service";
 
 @Component({
   selector: 'app-profile-page',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePageComponent implements OnInit {
 
-  constructor() { }
+  currentAccount: Account;
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.currentAccount = this.authenticationService.getAccount();
+    console.log("ProfilePage currentAccount: ", this.currentAccount);
   }
 
 }

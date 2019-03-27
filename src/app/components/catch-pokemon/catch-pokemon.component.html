@@ -23,7 +23,8 @@
   </div>
   <div class="row">
     <div class="col">
-      <button class="btn btn-primary" [disabled]="selectedBall === null" (click)="catchRandom()">Catch Random</button>
+      <button class="btn btn-primary" [disabled]="ballToUse === ''" (click)="catchRandom()">Catch Random</button>
+      <span>{{ result }}</span>
     </div>
   </div>
 </div>

@@ -27,6 +27,7 @@ export class CatchPokemonComponent implements OnInit {
   species = [];
   currentItemTypeCounts = {};
   ballToUse = "";
+  result = "";
 
   constructor(
     private speciesService: SpeciesService,
@@ -49,6 +50,8 @@ export class CatchPokemonComponent implements OnInit {
     this.getItemTypeCounts().then(data => {
       this.currentItemTypeCounts = data;
     });
+
+    console.log(this.ballToUse);
   }
 
   getSpeciesIconSrc(name: string) {
@@ -133,6 +136,7 @@ export class CatchPokemonComponent implements OnInit {
     });
 
     if (Math.random() > 0.5) {
+      this.result = `Pokemon with Pokedex number ${randomPokemonDexNum} has been caught!`;
       const pokemon = new Pokemon();
       pokemon.ownerId = this.currentAccount.id;
       pokemon.dexNum = randomPokemonDexNum;
@@ -145,6 +149,8 @@ export class CatchPokemonComponent implements OnInit {
           console.log("CatchPokemonComponent ");
         }
       );
+    } else {
+      this.result = "Pokemon escaped!";
     }
   }
 
