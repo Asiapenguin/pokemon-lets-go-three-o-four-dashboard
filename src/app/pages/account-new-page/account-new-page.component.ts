@@ -29,6 +29,7 @@ export class AccountNewPageComponent {
 
   doSignUp() {
     // POST /account
+    console.log("ACCOUNT NEW PAGE ACCOUNT:", this.account)
     this.accountService.create(this.account).then((data: Account) => {
       this.account = data;
       console.log("After create user: ", this.account);

@@ -39,6 +39,7 @@ export class PokemonCenterComponent implements OnInit {
   }
 
   private getCurrentAccountPokemon() {
+    // TODO: /user/:id/pokemon
     // GET: /pokemon?ownerId=
     return new Promise((res, rej) => {
       this.pokemonService

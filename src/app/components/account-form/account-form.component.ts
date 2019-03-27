@@ -22,7 +22,7 @@ export class AccountInfo {
 })
 export class AccountFormComponent implements OnInit {
   accountInfo: AccountInfo = new AccountInfo();
-  itemsTypes = [];
+  itemTypes = [];
 
   constructor(
     private accountService: AccountService,
@@ -33,7 +33,7 @@ export class AccountFormComponent implements OnInit {
 
   ngOnInit() {
     this.itemTypeService.findAll().get().then((data: ListResponse<ItemType>) => {
-      this.itemsTypes = data.data;
+      this.itemTypes = data.data;
     },
     err => {
       console.log("AccountForm GET /itemType error: ", err);
@@ -86,5 +86,7 @@ export class AccountFormComponent implements OnInit {
       this.accountInfo.addItemAccId,
       this.accountInfo.itemQuantity
     );
+    // /item
+    // { playableId, itemType: string, quantity: number }
   }
 }

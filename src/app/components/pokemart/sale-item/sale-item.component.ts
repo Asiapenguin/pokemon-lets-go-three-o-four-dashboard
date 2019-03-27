@@ -25,7 +25,7 @@ export class SaleItemComponent implements OnInit {
 
   ngOnInit() {
     this.currentQuantity = 0;
-    this.setSaleItemSrc(this.saleItemType.name);
+    this.setSaleItemSrc(this.saleItemType.type);
   }
 
   private setSaleItemSrc(name: string) {

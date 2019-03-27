@@ -5,6 +5,8 @@ import { MapRegionService } from "src/app/services/map-region.service";
 import { MapRegion } from "src/app/models/mapRegion";
 import { ListResponse } from "src/app/services/resource.service";
 import { AccountService } from "src/app/services/account.service";
+import { HttpClient } from '@angular/common/http';
+import { UrlService } from 'src/app/services/url.service';
 
 export class MapRegionInfo {
   public newRegion: MapRegion;
@@ -27,7 +29,9 @@ export class MapMoveComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private mapRegionService: MapRegionService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private urlService: UrlService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -71,15 +75,22 @@ export class MapMoveComponent implements OnInit {
           this.currentAccount.locatedat = this.mapRegionInfo.newRegion.name;
           // PUT: /user
           console.log(this.currentAccount)
-          this.accountService.update(this.currentAccount).then(updatedAccount => {
-            // console.log("moveRegion", mapRegion);
+          this.http.put(this.urlService.getEndpoint() + "/user/" + this.currentAccount.id + "/move", this.currentAccount).subscribe((data: Account) => {
             this.currentMap = this.mapRegionInfo.newRegion;
             this.currentMapSrc = this.getMapSrc(this.currentMap.name);
             this.newRegion.emit(mapRegion);
           },
           err => {
-            console.log("MapMoveComponent PUT /account error: ", err);
+            console.log("MapMoveComponent PUT /user/:id/move error: ", err);
           });
+          // this.accountService.update(this.currentAccount).then((data: Account) => {
+          //   this.currentMap = this.mapRegionInfo.newRegion;
+          //   this.currentMapSrc = this.getMapSrc(this.currentMap.name);
+          //   this.newRegion.emit(mapRegion);
+          // },
+          // err => {
+          //   console.log("MapMoveComponent PUT /user/:id/move error: ", err);
+          // });
         },
         err => {
           console.log("MapMoveComponent GET /mapRegion/:name error: ", err);

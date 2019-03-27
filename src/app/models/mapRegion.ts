@@ -7,6 +7,6 @@ export class MapRegion extends Resource {
   id: number;
   name: string;
   type: string;
-  maxSpawnNumber: number;
+  maxspawnnumber: number;
   buildings: Building[];
 }

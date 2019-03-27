@@ -62,8 +62,8 @@
         class="form-control"
         [(ngModel)]="accountInfo.itemTypeId"
       >
-        <option *ngFor="let item of items" [ngValue]="item.id">{{
-          item.name
+        <option *ngFor="let itemType of itemTypes" [ngValue]="itemType.id">{{
+          itemType.type
         }}</option>
       </select>
     </div>

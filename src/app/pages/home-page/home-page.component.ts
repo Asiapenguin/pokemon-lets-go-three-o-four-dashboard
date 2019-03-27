@@ -45,7 +45,7 @@ export class HomePageComponent implements OnInit {
     } else {
       this.pokemonCenter = false;
     }
-    if (mapRegion.buildings.some(building => building.type === "Pokemart")) {
+    if (mapRegion.buildings.some(building => building.type === "PokeMart")) {
       this.pokemart = true;
     } else {
       this.pokemart = false;
@@ -55,9 +55,11 @@ export class HomePageComponent implements OnInit {
     } else {
       this.gym = false;
     }
-    if (mapRegion.type === "Forest" || mapRegion.type === "Path") {
+    if (mapRegion.maxspawnnumber > 0) {
+      console.log("HomePage has Catch")
       this.catch = true;
     } else {
+      console.log("HomePage does not have Catch")
       this.catch = false;
     }
 

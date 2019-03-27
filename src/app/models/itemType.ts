@@ -4,6 +4,6 @@ export class ItemType extends Resource {
   static resourcePath = "/itemType";
 
   id: number;
-  name: string;
+  type: string;
   cost: number;
 }

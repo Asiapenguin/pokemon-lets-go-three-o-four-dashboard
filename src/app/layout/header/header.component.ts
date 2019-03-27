@@ -10,7 +10,7 @@ import { RouteService } from "src/app/services/route.service";
 })
 export class HeaderComponent implements OnInit {
 
-  admin = false;
+  admin: boolean;
 
   constructor(
     private headerService: HeaderService,
@@ -27,10 +27,11 @@ export class HeaderComponent implements OnInit {
   checkAdminPrivileges() {
     const account = this.authenticationService.getAccount();
     console.log("HeaderComponent checkAdminPriv: ", account);
-    if (account.admin) {
-      return true;
+    if (account) {
+      if (account.admin) { return true; }
+    } else {
+      return false;
     }
-    return false;
   }
 
   logout() {

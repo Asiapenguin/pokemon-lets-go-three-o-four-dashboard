@@ -12,8 +12,8 @@ import { ItemType } from 'src/app/models/itemType';
 import { Pokemon } from 'src/app/models/pokemon';
 
 export class ItemTypeCount {
-  public itemType: string;
-  public itemCount: number;
+  public itemtype: string;
+  public quantity: number;
 }
 
 @Component({
@@ -50,11 +50,39 @@ export class CatchPokemonComponent implements OnInit {
   getItemTypeCounts() {
     return new Promise((res, rej) => {
       // GET /user/:id/itemCount
-      this.http.get(this.urlService.getEndpoint() + "/user/" + this.currentAccount.id + "/itemCount").subscribe((data: ItemTypeCount[]) => {
-        let pokeBallCount = data[0].itemCount;
-        let greatBallCount = data[1].itemCount;
-        let ultraBallCount = data[2].itemCount;
-        let masterBallCount = data[3].itemCount;
+      this.http.get(this.urlService.getEndpoint() + "/user/" + this.currentAccount.id + "/itemCount").subscribe((data: ListResponse<ItemTypeCount>) => {
+        let pokeBallCount;
+        let greatBallCount;
+        let ultraBallCount;
+        let masterBallCount;
+
+        let pokeBall: ItemTypeCount = data.data.find(it => it.itemtype === "Poke Ball");
+        if (pokeBall) {
+          pokeBallCount = pokeBall.quantity;
+        } else {
+          pokeBallCount = 0;
+        }
+
+        let greatBall: ItemTypeCount = data.data.find(it => it.itemtype === "Great Ball");
+        if (greatBall) {
+          greatBallCount = greatBall.quantity;
+        } else {
+          greatBallCount = 0;
+        }
+
+        let ultraBall: ItemTypeCount = data.data.find(it => it.itemtype === "Ultra Ball");
+        if (ultraBall) {
+          ultraBallCount = ultraBall.quantity;
+        } else {
+          ultraBallCount = 0;
+        }
+
+        let masterBall: ItemTypeCount = data.data.find(it => it.itemtype === "Master Ball");
+        if (masterBall) {
+          masterBallCount = masterBall.quantity;
+        } else {
+          masterBallCount = 0;
+        }
 
         let counts = {
           "Poke Ball": pokeBallCount,
@@ -62,6 +90,7 @@ export class CatchPokemonComponent implements OnInit {
           "Ultra Ball": ultraBallCount,
           "Master Ball": masterBallCount
         }
+        console.log("CatchPokemon itemTypeCounts: ", counts);
 
         res(counts);
       })
