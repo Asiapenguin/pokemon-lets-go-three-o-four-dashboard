@@ -10,11 +10,7 @@ import { AuthenticationService } from "src/app/services/authentication.service";
 import { Account } from "src/app/models/account";
 import { ItemType } from "src/app/models/itemType";
 import { Pokemon } from "src/app/models/pokemon";
-
-export class ItemTypeCount {
-  public itemtype: string;
-  public quantity: number;
-}
+import { ItemTypeCount } from "src/app/models/itemTypeCount";
 
 @Component({
   selector: "app-catch-pokemon",
@@ -110,7 +106,7 @@ export class CatchPokemonComponent implements OnInit {
             masterBallCount = 0;
           }
 
-          let counts = {
+          const counts = {
             "Poke Ball": pokeBallCount,
             "Great Ball": greatBallCount,
             "Ultra Ball": ultraBallCount,

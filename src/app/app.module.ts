@@ -34,6 +34,7 @@ import { SaleItemComponent } from './components/pokemart/sale-item/sale-item.com
 import { ProfilePageComponent } from "./pages/profile-page/profile-page.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { AccountPokemonComponent } from "./components/account-pokemon/account-pokemon.component";
+import { AccountItemComponent } from "./components/account-item/account-item.component";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AccountPokemonComponent } from "./components/account-pokemon/account-po
     GymLeaderItemComponent,
     ProfilePageComponent,
     ProfileComponent,
-    AccountPokemonComponent
+    AccountPokemonComponent,
+    AccountItemComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],

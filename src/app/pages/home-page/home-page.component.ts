@@ -56,10 +56,8 @@ export class HomePageComponent implements OnInit {
       this.gym = false;
     }
     if (mapRegion.maxspawnnumber > 0) {
-      console.log("HomePage has Catch")
       this.catch = true;
     } else {
-      console.log("HomePage does not have Catch")
       this.catch = false;
     }
 
