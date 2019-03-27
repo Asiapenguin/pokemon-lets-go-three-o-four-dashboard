@@ -11,6 +11,8 @@ import { Account } from "src/app/models/account";
 import { ItemType } from "src/app/models/itemType";
 import { Pokemon } from "src/app/models/pokemon";
 import { ItemTypeCount } from "src/app/models/itemTypeCount";
+import { AccountService } from "src/app/services/account.service";
+import { ItemService } from "src/app/services/item.service";
 
 @Component({
   selector: "app-catch-pokemon",
@@ -19,7 +21,7 @@ import { ItemTypeCount } from "src/app/models/itemTypeCount";
 })
 export class CatchPokemonComponent implements OnInit {
   @Input() currentMap: MapRegion;
-  currentAccount: Account;
+  @Input() currentAccount: Account;
   species = [];
   currentItemTypeCounts = {};
   ballToUse = "";
@@ -27,14 +29,12 @@ export class CatchPokemonComponent implements OnInit {
 
   constructor(
     private speciesService: SpeciesService,
-    private http: HttpClient,
-    private urlService: UrlService,
-    private authenticationService: AuthenticationService,
-    private pokemonService: PokemonService
+    private accountService: AccountService,
+    private pokemonService: PokemonService,
+    private itemService: ItemService
   ) {}
 
   ngOnInit() {
-    this.currentAccount = this.authenticationService.getAccount();
     this.speciesService
       .findWhere("foundAt", this.currentMap.name)
       .get()
@@ -43,80 +43,13 @@ export class CatchPokemonComponent implements OnInit {
         this.species = data.data;
       });
 
-    this.getItemTypeCounts().then(data => {
+    this.accountService.getAccountItemTypeCounts(this.currentAccount.id).then(data => {
       this.currentItemTypeCounts = data;
     });
-
-    console.log(this.ballToUse);
   }
 
   getSpeciesIconSrc(name: string) {
     return `../../../assets/pokemon-sprites/${name}.gif`;
-  }
-
-  getItemTypeCounts() {
-    return new Promise((res, rej) => {
-      // GET /user/:id/itemCount
-      this.http
-        .get(
-          this.urlService.getEndpoint() +
-            "/user/" +
-            this.currentAccount.id +
-            "/itemCount"
-        )
-        .subscribe((data: ListResponse<ItemTypeCount>) => {
-          let pokeBallCount;
-          let greatBallCount;
-          let ultraBallCount;
-          let masterBallCount;
-
-          const pokeBall: ItemTypeCount = data.data.find(
-            it => it.itemtype === "Poke Ball"
-          );
-          if (pokeBall) {
-            pokeBallCount = pokeBall.quantity;
-          } else {
-            pokeBallCount = 0;
-          }
-
-          const greatBall: ItemTypeCount = data.data.find(
-            it => it.itemtype === "Great Ball"
-          );
-          if (greatBall) {
-            greatBallCount = greatBall.quantity;
-          } else {
-            greatBallCount = 0;
-          }
-
-          const ultraBall: ItemTypeCount = data.data.find(
-            it => it.itemtype === "Ultra Ball"
-          );
-          if (ultraBall) {
-            ultraBallCount = ultraBall.quantity;
-          } else {
-            ultraBallCount = 0;
-          }
-
-          const masterBall: ItemTypeCount = data.data.find(
-            it => it.itemtype === "Master Ball"
-          );
-          if (masterBall) {
-            masterBallCount = masterBall.quantity;
-          } else {
-            masterBallCount = 0;
-          }
-
-          const counts = {
-            "Poke Ball": pokeBallCount,
-            "Great Ball": greatBallCount,
-            "Ultra Ball": ultraBallCount,
-            "Master Ball": masterBallCount
-          };
-          console.log("CatchPokemon itemTypeCounts: ", counts);
-
-          res(counts);
-        });
-    });
   }
 
   setBall(name: string) {
@@ -127,7 +60,7 @@ export class CatchPokemonComponent implements OnInit {
     const rand = Math.floor(Math.random() * this.species.length);
     const randomPokemonDexNum = this.species[rand].id;
 
-    this.setBallToUsed().then(data => {
+    this.itemService.setItemToUsed(this.currentAccount.id, this.ballToUse).then(data => {
       this.currentItemTypeCounts[this.ballToUse] -= 1;
     });
 
@@ -148,25 +81,5 @@ export class CatchPokemonComponent implements OnInit {
     } else {
       this.result = "Pokemon escaped!";
     }
-  }
-
-  setBallToUsed() {
-    return new Promise((res, rej) => {
-      // PUT /item
-      this.http
-        .put(this.urlService.getEndpoint() + "/item", {
-          userId: this.currentAccount.id,
-          itemType: this.ballToUse
-        })
-        .subscribe(
-          data => {
-            console.log("Used ball to catch pokemon: ", data);
-            res(data);
-          },
-          err => {
-            console.log("CatchPokemonComponent PUT /item error: ", err);
-          }
-        );
-    });
   }
 }

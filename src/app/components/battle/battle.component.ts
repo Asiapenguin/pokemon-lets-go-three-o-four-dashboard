@@ -1,13 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, OnChanges } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChange,
+  OnChanges
+} from "@angular/core";
 import { MapRegion } from "src/app/models/mapRegion";
 import { Npc } from "src/app/models/npc";
 import { AccountService } from "src/app/services/account.service";
 import { Account } from "src/app/models/account";
-import { PokemonService } from "src/app/services/pokemon.service";
-import { HttpClient } from "@angular/common/http";
-import { UrlService } from "src/app/services/url.service";
 import { Pokemon } from "src/app/models/pokemon";
-import { ListResponse } from "src/app/services/resource.service";
 
 @Component({
   selector: "app-battle",
@@ -24,30 +28,14 @@ export class BattleComponent implements OnInit, OnChanges {
   currentTrainers = [];
   currentGymLeaders = [];
 
-  constructor(
-    private accountService: AccountService,
-    private pokemonService: PokemonService,
-    private http: HttpClient,
-    private urlService: UrlService
-  ) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit() {
-    // GET /user/:id/pokemons
-    this.http
-      .get(
-        this.urlService.getEndpoint() +
-          "/user/" +
-          this.currentAccount.id +
-          "/pokemons"
-      )
-      .subscribe(
-        (data: ListResponse<Pokemon>) => {
-          this.currentPokemon = data.data;
-        },
-        err => {
-          console.log("BattleComponent GET /user/:id/pokemons error: ", err);
-        }
-      );
+    this.accountService
+      .getAccountPokemon(this.currentAccount.id)
+      .then((data: Pokemon[]) => {
+        this.currentPokemon = data;
+      });
   }
 
   ngOnChanges(changes) {
@@ -57,10 +45,10 @@ export class BattleComponent implements OnInit, OnChanges {
   processNpcs(data: Npc[]) {
     this.currentTrainers = [];
     this.currentGymLeaders = [];
-    for (let i = 0 ; i < data.length ; i++) {
+    for (let i = 0; i < data.length; i++) {
       if (data[i].role === "Trainer") {
         this.currentTrainers.push(data[i]);
-      }  else {
+      } else {
         this.currentGymLeaders.push(data[i]);
       }
     }

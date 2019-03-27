@@ -58,26 +58,26 @@ export class AccountFormComponent implements OnInit {
     );
   }
 
-  setBalance() {
-    // PATCH: /account
-    this.http
-      .patch(this.urlService.getEndpoint() + "/account/balance", {
-        balanceAccId: this.accountInfo.balanceAccId,
-        balance: this.accountInfo.balance
-      })
-      .subscribe(
-        data => {
-          console.log(
-            `PATCH - Account ID ${
-              this.accountInfo.balanceAccId
-            }'s balance is set to ${this.accountInfo.balance}: ${data}`
-          );
-        },
-        err => {
-          console.log("PokemonForm PATCH /owner error: ", err);
-        }
-      );
-  }
+  // setBalance() {
+  //   // PATCH: /account
+  //   this.http
+  //     .put(this.urlService.getEndpoint() + "/user/" + this.accountInfo.balanceAccId, {
+  //       balanceAccId: this.accountInfo.balanceAccId,
+  //       balance: this.accountInfo.balance
+  //     })
+  //     .subscribe(
+  //       data => {
+  //         console.log(
+  //           `PATCH - Account ID ${
+  //             this.accountInfo.balanceAccId
+  //           }'s balance is set to ${this.accountInfo.balance}: ${data}`
+  //         );
+  //       },
+  //       err => {
+  //         console.log("PokemonForm PATCH /owner error: ", err);
+  //       }
+  //     );
+  // }
 
   addItem() {
     // TODO

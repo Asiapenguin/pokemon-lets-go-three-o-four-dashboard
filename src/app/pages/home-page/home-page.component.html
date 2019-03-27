@@ -21,7 +21,7 @@
   </div>
   <div class="col-6">
     <div *ngIf="catch">
-      <app-catch-pokemon [currentMap]="currentMap"></app-catch-pokemon>
+      <app-catch-pokemon [currentAccount]="currentAccount" [currentMap]="currentMap"></app-catch-pokemon>
     </div>
     <div *ngIf="!catch">
       No Pokemon spawn in this location. Move to somewhere else to catch wild Pokemon!

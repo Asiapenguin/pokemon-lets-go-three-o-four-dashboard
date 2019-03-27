@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Account } from "src/app/models/account";
 import { Pokemon } from "src/app/models/pokemon";
-import { ListResponse } from "src/app/services/resource.service";
-import { HttpClient } from "@angular/common/http";
-import { UrlService } from "src/app/services/url.service";
+import { AccountService } from "src/app/services/account.service";
 
 @Component({
   selector: 'app-account-pokemon',
@@ -15,30 +13,11 @@ export class AccountPokemonComponent implements OnInit {
   @Input() currentAccount: Account;
   currentAccountPokemon = [];
 
-  constructor(private http: HttpClient, private urlService: UrlService) { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit() {
-    this.getCurrentAccountPokemon().then((data: Pokemon[]) => {
+    this.accountService.getAccountPokemon(this.currentAccount.id).then((data: Pokemon[]) => {
       this.currentAccountPokemon = data;
-    });
-  }
-
-  private getCurrentAccountPokemon() {
-    // GET: /user/:id/pokemons
-    return new Promise((res, rej) => {
-      this.http
-        .get(
-          this.urlService.getEndpoint() +
-            "/user/" +
-            this.currentAccount.id +
-            "/pokemons"
-        )
-        .subscribe((data: ListResponse<Pokemon>) => {
-          res(data.data);
-        },
-        err => {
-          rej(err);
-        });
     });
   }
 
