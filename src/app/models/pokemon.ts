@@ -12,5 +12,5 @@ export class Pokemon extends Resource {
   dexNum: number;
   status: string;
   battlesDone: number;
-  ownerID: number;
+  ownerId: number;
 }

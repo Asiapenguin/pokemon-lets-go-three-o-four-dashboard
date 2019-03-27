@@ -36,7 +36,7 @@ export class SaleItemComponent implements OnInit {
     if (this.currentQuantity > 0) {
       this.currentQuantity -= 1;
       this.checkBalance();
-    } 
+    }
   }
 
   incrementQuantity() {

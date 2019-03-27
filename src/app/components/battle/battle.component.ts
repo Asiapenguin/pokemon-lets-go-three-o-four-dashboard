@@ -18,8 +18,6 @@ export class BattleComponent implements OnInit, OnChanges {
   @Input() gym: boolean;
   @Input() currentMap: MapRegion;
   @Input() currentAccount: Account;
-  // @Input() currentTrainers: Npc[];
-  // @Input() currentGymLeaders: Npc[];
   @Input() currentNpcs: Npc[];
   @Output() newBalance = new EventEmitter<number>();
   currentPokemon = [];

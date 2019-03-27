@@ -70,14 +70,8 @@ export class AuthenticationService {
             }
           },
           err => {
-            this.logout();
-            if (err.status === 401 || err.status === 403) {
-              rej(err.statusText);
-            } else if (err.error) {
-              rej(err.error);
-            } else {
-              rej();
-            }
+            console.log("AuthenticationService error: ", err);
+            rej(err);
           }
         );
       // res(this.account);

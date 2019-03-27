@@ -31,6 +31,7 @@ import { TrainerItemComponent } from "./components/battle/battle-trainer/trainer
 import { BattleGymLeaderComponent } from "./components/battle/battle-gym-leader/battle-gym-leader.component";
 import { GymLeaderItemComponent } from "./components/battle/battle-gym-leader/gym-leader-item/gym-leader-item.component";
 import { SaleItemComponent } from './components/pokemart/sale-item/sale-item.component';
+import { ProfilePageComponent } from "./pages/profile-page/profile-page.component";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { SaleItemComponent } from './components/pokemart/sale-item/sale-item.com
     BattleTrainerComponent,
     TrainerItemComponent,
     BattleGymLeaderComponent,
-    GymLeaderItemComponent
+    GymLeaderItemComponent,
+    ProfilePageComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],

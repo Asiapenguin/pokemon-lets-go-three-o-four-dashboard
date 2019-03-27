@@ -5,6 +5,8 @@ import { ItemType } from 'src/app/models/itemType';
 import { ListResponse } from 'src/app/services/resource.service';
 import { AccountService } from 'src/app/services/account.service';
 import { ItemPurchase } from './sale-item/sale-item.component';
+import { Item } from "src/app/models/item";
+import { ItemService } from "src/app/services/item.service";
 
 @Component({
   selector: 'app-pokemart',
@@ -17,7 +19,7 @@ export class PokemartComponent implements OnInit {
   @Output() newBalance = new EventEmitter<number>();
   saleItemTypes = [];
 
-  constructor(private itemTypeService: ItemTypeService, private accountService: AccountService) { }
+  constructor(private itemTypeService: ItemTypeService, private itemService: ItemService, private accountService: AccountService) { }
 
   ngOnInit() {
     this.itemTypeService.findAll().get().then((data: ListResponse<ItemType>) => {
@@ -37,7 +39,7 @@ export class PokemartComponent implements OnInit {
     this.newBalance.emit(editAccount.balance);
     // PUT: /account
     this.accountService.update(editAccount).then((data: Account) => {
-      console.log(`PATCH: Account ID ${editAccount.id}'s balance is now ${data.balance}`);
+      console.log(`PUT: Account ID ${editAccount.id}'s balance is now ${data.balance}`);
       this.currentAccount.balance = data.balance;
     },
     err => {
@@ -46,8 +48,11 @@ export class PokemartComponent implements OnInit {
 
     const promiseArr = [];
     for (let i = 0 ; i < itemPurchase.quantity ; i++) {
+      const newItem = new Item();
+      newItem.playableId = this.currentAccount.id;
+      newItem.type = itemPurchase.itemType.type;
       // POST: /item
-      promiseArr.push(this.itemTypeService.create(itemPurchase.itemType));
+      promiseArr.push(this.itemService.create(newItem));
     }
 
     Promise.all(promiseArr).then(data => {

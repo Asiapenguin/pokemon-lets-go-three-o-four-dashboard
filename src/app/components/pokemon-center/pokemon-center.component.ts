@@ -4,6 +4,8 @@ import { Account } from "src/app/models/account";
 import { PokemonService } from "src/app/services/pokemon.service";
 import { ListResponse } from "src/app/services/resource.service";
 import { Pokemon } from "src/app/models/pokemon";
+import { HttpClient } from "@angular/common/http";
+import { UrlService } from "src/app/services/url.service";
 
 @Component({
   selector: "app-pokemon-center",
@@ -12,9 +14,12 @@ import { Pokemon } from "src/app/models/pokemon";
 })
 export class PokemonCenterComponent implements OnInit {
   currentAccount: Account;
+
   constructor(
     private authenticationService: AuthenticationService,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private http: HttpClient,
+    private urlService: UrlService
   ) {}
 
   ngOnInit() {
@@ -24,43 +29,38 @@ export class PokemonCenterComponent implements OnInit {
   healAllPokemon() {
     this.getCurrentAccountPokemon().then((currentAccountPokemon: Pokemon[]) => {
       const promiseArr = [];
-      const fainted = currentAccountPokemon.filter(pokemon => pokemon.status === "Fainted");
+      const fainted = currentAccountPokemon.filter(
+        pokemon => pokemon.status === "Fainted"
+      );
       for (let i = 0; i < fainted.length; i++) {
         const currentFainted = fainted[i];
         fainted[i].status = "Active";
         // PATCH: /pokemon ???
-        promiseArr.push(this.pokemonService.patch(currentFainted));
+        promiseArr.push(this.pokemonService.update(currentFainted));
       }
 
       Promise.all(promiseArr).then(data => {
-        console.log("PokemonCenterComponent healAllPokemon Promise.all: ", data);
+        console.log(
+          "PokemonCenterComponent healAllPokemon Promise.all: ",
+          data
+        );
       });
     });
   }
 
   private getCurrentAccountPokemon() {
-    // TODO: /user/:id/pokemon
-    // GET: /pokemon?ownerId=
+    // GET: /user/:id/pokemons
     return new Promise((res, rej) => {
-      this.pokemonService
-        .findWhere("ownerId", this.currentAccount.id)
-        .get()
-        .then(
-          (data: ListResponse<Pokemon>) => {
-            console.log(
-              "PokemonCenterComponent Current Account Pokemon: ",
-              data.data
-            );
-            res(data.data);
-          },
-          err => {
-            console.log(
-              "PokemonCenterComponent GET /pokemon?ownerId= error: ",
-              err
-            );
-            rej(err);
-          }
-        );
+      this.http
+        .get(
+          this.urlService.getEndpoint() +
+            "/user/" +
+            this.currentAccount.id +
+            "/pokemons"
+        )
+        .subscribe((data: ListResponse<Pokemon>) => {
+          res(data.data);
+        });
     });
   }
 }
