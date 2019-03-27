@@ -25,7 +25,7 @@ export class AdminPageComponent implements OnInit {
     this.accountService.create(this.newAccount).then((data: Account) => {
       this.newAccount = data;
       console.log("After create account: ", this.newAccount);
-      this.pokemon.ownerID = this.newAccount.id;
+      this.pokemon.ownerId = this.newAccount.id;
       // POST /pokemon
       this.pokemonService.create(this.pokemon).then((data: Pokemon) => {
         this.pokemon = data;

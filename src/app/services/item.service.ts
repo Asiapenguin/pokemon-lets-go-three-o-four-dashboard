@@ -16,7 +16,7 @@ export class ItemService extends ResourceService {
       // PUT /item
       this.http
         .put(this.urlService.getEndpoint() + "/item", {
-          userId: accoun,
+          userId: accountId,
           itemType: itemType
         })
         .subscribe(
