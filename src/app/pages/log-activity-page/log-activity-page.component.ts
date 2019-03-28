@@ -12,7 +12,7 @@ import { CatchLogService } from 'src/app/services/catch-log.service';
 import { SellLogService } from 'src/app/services/sell-log.service';
 import { BattleLog } from "src/app/models/battleLog";
 import { BattleLogService } from "src/app/services/battle-log.service";
-import { AccountService, AllAccountPokemonCaughtCount } from 'src/app/services/account.service';
+import { AccountService, AllAccountPokemonCaughtCount, AccountAllItemType } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-log-activity-page',
@@ -28,6 +28,7 @@ export class LogActivityPageComponent implements OnInit {
   useLogs: UseLog[] = [];
   battleLogs: BattleLog[] = [];
   allAccountPokemonCaughtCount: AllAccountPokemonCaughtCount[] = [];
+  allAccountsWithAllItemTypes: AccountAllItemType[] = [];
 
   constructor(
     private accountService: AccountService,
@@ -60,6 +61,12 @@ export class LogActivityPageComponent implements OnInit {
     });
     this.accountService.getAllAccountPokemonCaughtCount().then((data: AllAccountPokemonCaughtCount[]) => {
       this.allAccountPokemonCaughtCount = data;
+    });
+  }
+
+  getAccountsWithAllItemTypes() {
+    this.accountService.getAccountsWithAllItemTypes().then((data: AccountAllItemType[]) => {
+      this.allAccountsWithAllItemTypes = data;
     });
   }
 

@@ -10,6 +10,12 @@ export class AllAccountPokemonCaughtCount {
   public total: number;
 }
 
+export class AccountAllItemType {
+  public id: number;
+  public name: string;
+  public locatedat: string;
+}
+
 @Injectable({
   providedIn: "root"
 })
@@ -146,6 +152,17 @@ export class AccountService extends ResourceService {
   getAllAccountPokemonCaughtCount() {
     return new Promise((res, rej) => {
       this.http.get(this.urlService.getEndpoint() + "/user/count").subscribe((data: ListResponse<AllAccountPokemonCaughtCount>) => {
+        res(data.data);
+      },
+      err => {
+        rej(err);
+      })
+    })
+  }
+
+  getAccountsWithAllItemTypes() {
+    return new Promise((res, rej) => {
+      this.http.get(this.urlService.getEndpoint() + "/user/allItemType").subscribe((data: ListResponse<AccountAllItemType>) => {
         res(data.data);
       },
       err => {

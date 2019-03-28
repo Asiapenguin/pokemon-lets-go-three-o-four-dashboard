@@ -147,5 +147,10 @@
         </tbody>
       </table>
     </div>
+    <h4 class="mt-4">Accounts with all types of items</h4>
+    <button class="btn btn-primary" (click)="getAccountsWithAllItemTypes()">Get Result</button>
+    <div *ngFor="let acc of allAccountsWithAllItemTypes">
+      {{ acc.name }}
+    </div>
   </div>
 </div>
