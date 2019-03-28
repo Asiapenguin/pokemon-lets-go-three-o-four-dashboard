@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnChanges } from "@angular/core";
 import { SpeciesService } from "src/app/services/species.service";
 import { ListResponse } from "src/app/services/resource.service";
 import { Species } from "src/app/models/species";
-import { TypeColors } from "src/app/models/typeColors";
+import { TypeColors, types } from "src/app/models/typeColors";
 import { AccountService } from "src/app/services/account.service";
 import { Account } from "src/app/models/account";
 import { AuthenticationService } from "src/app/services/authentication.service";
@@ -16,10 +16,13 @@ export class SpeciesCaughtInfo {
   templateUrl: "./pokedex-page.component.html",
   styleUrls: ["./pokedex-page.component.scss"]
 })
-export class PokedexPageComponent implements OnInit {
+export class PokedexPageComponent implements OnInit, OnChanges {
+  currentSpecies = [];
   allSpecies = [];
   totalNumSpecies: number;
   speciesCaught: number;
+  types = types;
+  filterType: string;
 
   currentAccount: Account;
 
@@ -36,9 +39,10 @@ export class PokedexPageComponent implements OnInit {
       .get()
       .then(
         (data: ListResponse<Species>) => {
+          this.currentSpecies = data.data;
           this.allSpecies = data.data;
-          this.totalNumSpecies = this.allSpecies.length;
-          console.log("PokedexComponent allSpecies: ", this.allSpecies);
+          this.totalNumSpecies = this.currentSpecies.length;
+          console.log("PokedexComponent allSpecies: ", this.currentSpecies);
         },
         err => {
           console.log("PokedexComponent GET /species error: ", err);
@@ -48,6 +52,21 @@ export class PokedexPageComponent implements OnInit {
     this.accountService.getSpeciesCount(this.currentAccount.id).then((data: SpeciesCaughtInfo) => {
       this.speciesCaught = data.speciescaught;
     });
+  }
+
+  ngOnChanges() {
+    console.log(this.filterType);
+  }
+
+  filterSpeciesBy(type: string) {
+    if (type !== "All") {
+      this.speciesService.filterSpeciesBy(type).then((data: any[]) => {
+        this.currentSpecies = this.allSpecies.filter(s => data.indexOf(s.id) > -1);
+        console.log("After filter", this.currentSpecies);
+      });
+    } else {
+      this.currentSpecies = this.allSpecies;
+    }
   }
 
   getSpeciesIconSrc(name: string) {

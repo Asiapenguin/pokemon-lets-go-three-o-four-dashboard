@@ -6,8 +6,25 @@
     >
   </div>
 </div>
-<div *ngIf="allSpecies" class="row">
-  <div class="col-sm-2 species-icon" *ngFor="let s of allSpecies">
+<div class="row">
+  <div class="col-4">
+    <select
+        name="typeSelect"
+        class="form-control"
+        [(ngModel)]="filterType"
+      >
+        <option>All</option>
+        <option *ngFor="let type of types" [ngValue]="type">{{
+          type
+        }}</option>
+      </select>
+  </div>
+  <div class="col-8">
+    <button class="btn btn-primary" (click)="filterSpeciesBy(filterType)">Filter</button>
+  </div>
+</div>
+<div *ngIf="currentSpecies" class="row mt-4">
+  <div class="col-sm-2 species-icon" *ngFor="let s of currentSpecies">
     <img width="80%" height="80%" [src]="getSpeciesIconSrc(s.name)" /><br />
     <span
       class="badge badge-pill"
