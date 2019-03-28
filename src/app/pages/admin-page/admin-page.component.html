@@ -11,8 +11,16 @@
     <app-map-form></app-map-form>
   </div>
   <div class="col-4">
-    <form #createAccForm="ngForm" class="form mb-2" (ngSubmit)="createAccount()" autocomplete="off">
-      <app-account-new-starter-form [account]="newAccount" [pokemon]="pokemon"></app-account-new-starter-form>
+    <form
+      #createAccForm="ngForm"
+      class="form mb-2"
+      (ngSubmit)="createAccount()"
+      autocomplete="off"
+    >
+      <app-account-new-starter-form
+        [account]="newAccount"
+        [pokemon]="pokemon"
+      ></app-account-new-starter-form>
       <div>
         <button type="submit" class="btn btn-secondary">Create</button>
       </div>
@@ -20,18 +28,34 @@
   </div>
   <div class="col-4">
     <h4>Update Account</h4>
-    <form #updateAccForm="ngForm" class="form mb-2" (ngSubmit)="updateAccount()" autocomplete="off">
+    <form
+      #updateAccForm="ngForm"
+      class="form mb-2"
+      (ngSubmit)="updateAccount()"
+      autocomplete="off"
+    >
       <div class="form-group">
         <label for="oldAccId">Account ID of the account to be updated</label>
         <div class="input-group mb-3 mx-auto">
-          <input #oldAccIdInput type="text" name="oldAccId" class="form-control" required [(ngModel)]="editAccount.id"
-            placeholder="Account ID" />
+          <input
+            #oldAccIdInput
+            type="text"
+            name="oldAccId"
+            class="form-control"
+            required
+            [(ngModel)]="editAccount.id"
+            placeholder="Account ID"
+          />
         </div>
       </div>
-      <app-account-new-form [account]="editAccount" [pokemon]="pokemon"></app-account-new-form>
+      <app-account-new-form
+        [account]="editAccount"
+        [pokemon]="pokemon"
+      ></app-account-new-form>
       <div>
         <button type="submit" class="btn btn-secondary">Update</button>
       </div>
     </form>
   </div>
 </div>
+<app-projection-query></app-projection-query>

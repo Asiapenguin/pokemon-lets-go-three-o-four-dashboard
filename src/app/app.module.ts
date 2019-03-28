@@ -36,6 +36,7 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { AccountPokemonComponent } from "./components/account-pokemon/account-pokemon.component";
 import { AccountItemComponent } from "./components/account-item/account-item.component";
 import { LogActivityPageComponent } from './pages/log-activity-page/log-activity-page.component';
+import { ProjectionQueryComponent } from "./components/projection-query/projection-query.component";
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { LogActivityPageComponent } from './pages/log-activity-page/log-activity
     ProfileComponent,
     AccountPokemonComponent,
     AccountItemComponent,
-    LogActivityPageComponent
+    LogActivityPageComponent,
+    ProjectionQueryComponent
   ],
   imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, NgbModule],
   providers: [],

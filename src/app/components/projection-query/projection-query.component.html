@@ -1,0 +1,56 @@
+<h4>Conditional Filter Species</h4>
+<div class="row">
+  <div class="col-3">
+    <select
+      name="projectionSelect"
+      class="form-control"
+      [(ngModel)]="projectionType"
+    >
+      <option>id</option>
+      <option>name</option>
+      <option>typei</option>
+      <option>typeii</option>
+      <option>foundat</option>
+    </select>
+  </div>
+  <div class="col-3">
+    <select
+      name="conditionSelect"
+      class="form-control"
+      [(ngModel)]="conditionType"
+    >
+      <option>id</option>
+      <option>name</option>
+      <option>typei</option>
+      <option>typeii</option>
+      <option>foundat</option>
+    </select>
+  </div>
+  <div class="col-3">
+    <div class="input-group mx-auto">
+      <input
+        #oldAccIdInput
+        type="text"
+        name="conditionValue"
+        class="form-control"
+        required
+        [(ngModel)]="conditionValue"
+        placeholder="WHERE value"
+      />
+    </div>
+  </div>
+  <div class="col-3">
+    <label></label>
+    <button
+      class="btn btn-primary"
+      (click)="filterSpeciesBy(projectionType, conditionType, conditionValue)"
+    >
+      Filter
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {{ result }}
+  </div>
+</div>
