@@ -5,6 +5,11 @@ import { UrlService } from "./url.service";
 import { ItemTypeCount } from "../models/itemTypeCount";
 import { Pokemon } from "../models/pokemon";
 
+export class AllAccountPokemonCaughtCount {
+  public username: string;
+  public total: number;
+}
+
 @Injectable({
   providedIn: "root"
 })
@@ -136,5 +141,16 @@ export class AccountService extends ResourceService {
           }
         );
     });
+  }
+
+  getAllAccountPokemonCaughtCount() {
+    return new Promise((res, rej) => {
+      this.http.get(this.urlService.getEndpoint() + "/user/count").subscribe((data: ListResponse<AllAccountPokemonCaughtCount>) => {
+        res(data.data);
+      },
+      err => {
+        rej(err);
+      })
+    })
   }
 }

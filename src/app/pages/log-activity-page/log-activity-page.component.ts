@@ -12,6 +12,7 @@ import { CatchLogService } from 'src/app/services/catch-log.service';
 import { SellLogService } from 'src/app/services/sell-log.service';
 import { BattleLog } from "src/app/models/battleLog";
 import { BattleLogService } from "src/app/services/battle-log.service";
+import { AccountService, AllAccountPokemonCaughtCount } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-log-activity-page',
@@ -26,8 +27,10 @@ export class LogActivityPageComponent implements OnInit {
   catchLogs: CatchLog[] = [];
   useLogs: UseLog[] = [];
   battleLogs: BattleLog[] = [];
+  allAccountPokemonCaughtCount: AllAccountPokemonCaughtCount[] = [];
 
   constructor(
+    private accountService: AccountService,
     private moveAcrossLogService: MoveAcrossLogService,
     private healLogService: HealLogService,
     private sellLogService: SellLogService,
@@ -54,6 +57,9 @@ export class LogActivityPageComponent implements OnInit {
     });
     this.battleLogService.findAll().get().then((data: ListResponse<BattleLog>) => {
       this.battleLogs = data.data;
+    });
+    this.accountService.getAllAccountPokemonCaughtCount().then((data: AllAccountPokemonCaughtCount[]) => {
+      this.allAccountPokemonCaughtCount = data;
     });
   }
 
