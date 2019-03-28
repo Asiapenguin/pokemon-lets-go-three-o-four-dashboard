@@ -12,6 +12,7 @@ export class PokemonInfo {
   public newCharId: number;
   public deletePokemonId: number;
   public randomQuantity: number;
+  public ownerRandomId: number;
 }
 
 @Component({
@@ -102,6 +103,7 @@ export class PokemonFormComponent implements OnInit {
       randomDexNums.push(randomDexNum);
       const newPokemon = new Pokemon();
       newPokemon.dexNum = randomDexNum;
+      newPokemon.ownerId = this.pokemonInfo.ownerRandomId;
       // POST: /pokemon
       promiseArr.push(this.pokemonService.create(newPokemon));
     }
@@ -117,7 +119,7 @@ export class PokemonFormComponent implements OnInit {
     const legendaryDexNums = this.pokemonService.getLegendaryDexNums();
     let result;
     do {
-      result = (Math.random() * 151) + 1;
+      result = Math.floor(Math.random() * 151) + 1;
     } while (legendaryDexNums.indexOf(result) > -1);
     return result;
   }

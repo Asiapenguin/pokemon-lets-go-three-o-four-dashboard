@@ -119,7 +119,20 @@
       </div>
     </div>
     <div class="col-4">
-      <button type="submit" class="btn btn-secondary">
+      <div class="input-group mb-3">
+        <input
+          #ownerRandomIdInput
+          type="text"
+          name="ownerRandomId"
+          class="form-control"
+          required
+          [(ngModel)]="pokemonInfo.ownerRandomId"
+          placeholder="Owner ID"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary" [disabled]="addRandomForm.invalid">
         Add
       </button>
     </div>

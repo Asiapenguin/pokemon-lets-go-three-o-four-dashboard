@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="col-4">
-      <button type="submit" class="btn btn-secondary">Delete</button>
+      <button type="submit" class="btn btn-secondary" [disabled]="deleteForm.invalid">Delete</button>
     </div>
   </div>
 </form>
@@ -60,9 +60,9 @@
       <select
         name="itemTypeId"
         class="form-control"
-        [(ngModel)]="accountInfo.itemTypeId"
+        [(ngModel)]="accountInfo.itemType"
       >
-        <option *ngFor="let itemType of itemTypes" [ngValue]="itemType.id">{{
+        <option *ngFor="let itemType of itemTypes" [ngValue]="itemType.type">{{
           itemType.type
         }}</option>
       </select>
@@ -70,9 +70,9 @@
     <div class="col-4">
       <div class="input-group mb-3">
         <input
-          #addItemIdInput
+          #addItemAccIdInput
           type="text"
-          name="addItemId"
+          name="addItemAccId"
           class="form-control"
           required
           [(ngModel)]="accountInfo.addItemAccId"
@@ -92,7 +92,7 @@
       </div>
     </div>
     <div class="col-4">
-      <button type="submit" class="btn btn-secondary">Add</button>
+      <button type="submit" class="btn btn-secondary" [disabled]="addItemForm.invalid">Add</button>
     </div>
   </div>
 </form>

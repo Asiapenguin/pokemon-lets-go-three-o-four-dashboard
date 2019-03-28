@@ -12,7 +12,6 @@ import { AccountNewPageComponent } from "./pages/account-new-page/account-new-pa
 import { AdminPageComponent } from "./pages/admin-page/admin-page.component";
 import { HeaderComponent } from "./layout/header/header.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
-import { ItemFormComponent } from "./components/item-form/item-form.component";
 import { LayoutComponent } from "./layout/layout.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { MainComponent } from "./layout/main/main.component";
@@ -37,6 +36,7 @@ import { AccountPokemonComponent } from "./components/account-pokemon/account-po
 import { AccountItemComponent } from "./components/account-item/account-item.component";
 import { LogActivityPageComponent } from './pages/log-activity-page/log-activity-page.component';
 import { ProjectionQueryComponent } from "./components/projection-query/projection-query.component";
+import { ItemTypeFormComponent } from './components/item-type-form/item-type-form.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { ProjectionQueryComponent } from "./components/projection-query/projecti
     AdminPageComponent,
     HeaderComponent,
     HomePageComponent,
-    ItemFormComponent,
+    ItemTypeFormComponent,
     LayoutComponent,
     LoginPageComponent,
     MainComponent,
