@@ -13,6 +13,25 @@ export class AccountService extends ResourceService {
     super(injector, Account);
   }
 
+  moveToRegion(account: Account, mapRegionName: string) {
+    return new Promise((res, rej) => {
+      account.locatedat = mapRegionName;
+      this.http
+        .put(
+          this.urlService.getEndpoint() + 
+            "/user/" + 
+            account.id + 
+            "/move", 
+            account
+        ).subscribe((data: Account) => {
+          res(data);
+        },
+        err => {
+          rej(err);
+        });
+    })
+  }
+
   getAccountPokemon(id: number) {
     // GET: /user/:id/pokemons
     return new Promise((res, rej) => {

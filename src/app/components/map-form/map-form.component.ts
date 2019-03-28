@@ -32,24 +32,13 @@ export class MapFormComponent implements OnInit {
   }
 
   updateSpawnNumber() {
-    // PATCH: /mapRegion
-    this.http
-      .patch(this.urlService.getEndpoint() + "/mapRegion", {
-        mapRegionName: this.mapRegionInfo.mapRegionName,
-        maxSpawnNum: this.mapRegionInfo.maxSpawnNum
-      })
-      .subscribe(
-        data => {
-          console.log(
-            `PATCH - Map ID ${
-            this.mapRegionInfo.mapRegionName
-            }'s max spawn number is set to ${this.mapRegionInfo.maxSpawnNum}: ${data}`
-          );
-        },
-        err => {
-          console.log("MapForm PATCH /mapRegion error: ", err);
-        }
-      );
+    // PUT: /mapRegion/:name
+    this.mapRegionService.updateSpawnNumber(this.mapRegionInfo.mapRegionName, this.mapRegionInfo.maxSpawnNum).then((data: MapRegion) => {
+      console.log(`PUT /mapRegion/${this.mapRegionInfo.mapRegionName}: ${data}`);
+    },
+    err => {
+      console.log(`PUT /mapRegion/${this.mapRegionInfo.mapRegionName} error: ${err}`)
+    });
   }
 
 }

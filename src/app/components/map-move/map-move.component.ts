@@ -5,8 +5,6 @@ import { MapRegionService } from "src/app/services/map-region.service";
 import { MapRegion } from "src/app/models/mapRegion";
 import { ListResponse } from "src/app/services/resource.service";
 import { AccountService } from "src/app/services/account.service";
-import { HttpClient } from '@angular/common/http';
-import { UrlService } from 'src/app/services/url.service';
 
 export class MapRegionInfo {
   public newRegion: MapRegion;
@@ -29,9 +27,7 @@ export class MapMoveComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private mapRegionService: MapRegionService,
-    private accountService: AccountService,
-    private urlService: UrlService,
-    private http: HttpClient
+    private accountService: AccountService
   ) {}
 
   ngOnInit() {
@@ -72,12 +68,12 @@ export class MapMoveComponent implements OnInit {
       // GET: /mapRegion/:name
       this.mapRegionService.get(this.mapRegionInfo.newRegion.name).then(
         (mapRegion: MapRegion) => {
-          this.currentAccount.locatedat = this.mapRegionInfo.newRegion.name;
           // PUT: /user
           console.log(this.currentAccount)
-          this.http.put(this.urlService.getEndpoint() + "/user/" + this.currentAccount.id + "/move", this.currentAccount).subscribe((data: Account) => {
+          this.accountService.moveToRegion(this.currentAccount, this.mapRegionInfo.newRegion.name).then((data: Account) => {
+            this.currentAccount = data;
             this.currentMap = this.mapRegionInfo.newRegion;
-            this.currentMapSrc = this.getMapSrc(this.currentMap.name);
+            this.currentMapSrc = this.getMapSrc(data.locatedat);
             this.newRegion.emit(mapRegion);
           },
           err => {

@@ -6,6 +6,7 @@ import { ListResponse } from "src/app/services/resource.service";
 import { Pokemon } from "src/app/models/pokemon";
 import { HttpClient } from "@angular/common/http";
 import { UrlService } from "src/app/services/url.service";
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: "app-pokemon-center",
@@ -18,8 +19,7 @@ export class PokemonCenterComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private pokemonService: PokemonService,
-    private http: HttpClient,
-    private urlService: UrlService
+    private accountService: AccountService
   ) {}
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class PokemonCenterComponent implements OnInit {
   }
 
   healAllPokemon() {
-    this.getCurrentAccountPokemon().then((currentAccountPokemon: Pokemon[]) => {
+    this.accountService.getAccountPokemon(this.currentAccount.id).then((currentAccountPokemon: Pokemon[]) => {
       const promiseArr = [];
       const fainted = currentAccountPokemon.filter(
         pokemon => pokemon.status === "Fainted"
@@ -45,25 +45,6 @@ export class PokemonCenterComponent implements OnInit {
           data
         );
       });
-    });
-  }
-
-  private getCurrentAccountPokemon() {
-    // GET: /user/:id/pokemons
-    return new Promise((res, rej) => {
-      this.http
-        .get(
-          this.urlService.getEndpoint() +
-            "/user/" +
-            this.currentAccount.id +
-            "/pokemons"
-        )
-        .subscribe((data: ListResponse<Pokemon>) => {
-          res(data.data);
-        },
-        err => {
-          rej(err);
-        });
     });
   }
 }
