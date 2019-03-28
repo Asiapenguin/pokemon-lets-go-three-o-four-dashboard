@@ -10,6 +10,8 @@ import { HealLogService } from 'src/app/services/heal-log.service';
 import { UseLogService } from 'src/app/services/use-log.service';
 import { CatchLogService } from 'src/app/services/catch-log.service';
 import { SellLogService } from 'src/app/services/sell-log.service';
+import { BattleLog } from "src/app/models/battleLog";
+import { BattleLogService } from "src/app/services/battle-log.service";
 
 @Component({
   selector: 'app-log-activity-page',
@@ -23,13 +25,15 @@ export class LogActivityPageComponent implements OnInit {
   sellLogs: SellLog[] = [];
   catchLogs: CatchLog[] = [];
   useLogs: UseLog[] = [];
+  battleLogs: BattleLog[] = [];
 
   constructor(
     private moveAcrossLogService: MoveAcrossLogService,
     private healLogService: HealLogService,
     private sellLogService: SellLogService,
     private catchLogService: CatchLogService,
-    private useLogService: UseLogService
+    private useLogService: UseLogService,
+    private battleLogService: BattleLogService
   ) { }
 
   ngOnInit() {
@@ -47,7 +51,10 @@ export class LogActivityPageComponent implements OnInit {
     });
     this.useLogService.findAll().get().then((data: ListResponse<UseLog>) => {
       this.useLogs = data.data;
-    })
+    });
+    this.battleLogService.findAll().get().then((data: ListResponse<BattleLog>) => {
+      this.battleLogs = data.data;
+    });
   }
 
 }

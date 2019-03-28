@@ -82,6 +82,27 @@
     </tbody>
   </table>
 </div>
+<h4 class="mt-4">Pokemon Battle Logs</h4>
+<div class="table-container">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th width="20%">Log ID</th>
+        <th width="20%">Account ID</th>
+        <th width="30%">NPC ID</th>
+        <th width="30%">Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bl of battleLogs">
+        <td>{{ bl.id }}</td>
+        <td>{{ bl.playableid }}</td>
+        <td>{{ bl.nonplayableid }}</td>
+        <td>{{ bl.happenedat | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <h4 class="mt-4">Item Sold Logs</h4>
 <div class="table-container">
   <table class="table table-striped table-sm">
