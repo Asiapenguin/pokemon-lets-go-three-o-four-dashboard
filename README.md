@@ -74,6 +74,6 @@ Note: This is for Windows users, not sure if Mac/Linux users have this issue.
 ```
 host    replication     all             127.0.0.1/32            trust
 host    replication     all             ::1/128                 trust
-host	all				all 			0.0.0.0/0				trust
-host	all				all 			::/0					trust
+host    all             all             0.0.0.0/0               trust
+host    all             all             ::/0                    trust
 ```
