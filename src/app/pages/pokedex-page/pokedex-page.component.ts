@@ -3,6 +3,13 @@ import { SpeciesService } from "src/app/services/species.service";
 import { ListResponse } from "src/app/services/resource.service";
 import { Species } from "src/app/models/species";
 import { TypeColors } from "src/app/models/typeColors";
+import { AccountService } from "src/app/services/account.service";
+import { Account } from "src/app/models/account";
+import { AuthenticationService } from "src/app/services/authentication.service";
+
+export class SpeciesCaughtInfo {
+  public speciescaught: number;
+}
 
 @Component({
   selector: "app-pokedex-page",
@@ -14,20 +21,33 @@ export class PokedexPageComponent implements OnInit {
   totalNumSpecies: number;
   speciesCaught: number;
 
-  constructor(private speciesService: SpeciesService) {}
+  currentAccount: Account;
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    private speciesService: SpeciesService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit() {
+    this.currentAccount = this.authenticationService.getAccount();
     this.speciesService
       .findAll()
       .get()
-      .then((data: ListResponse<Species>) => {
-        this.allSpecies = data.data;
-        this.totalNumSpecies = this.allSpecies.length;
-        console.log("PokedexComponent allSpecies: ", this.allSpecies);
-      },
-      err => {
-        console.log("PokedexComponent GET /species error: ", err);
-      });
+      .then(
+        (data: ListResponse<Species>) => {
+          this.allSpecies = data.data;
+          this.totalNumSpecies = this.allSpecies.length;
+          console.log("PokedexComponent allSpecies: ", this.allSpecies);
+        },
+        err => {
+          console.log("PokedexComponent GET /species error: ", err);
+        }
+      );
+
+    this.accountService.getSpeciesCount(this.currentAccount.id).then((data: SpeciesCaughtInfo) => {
+      this.speciesCaught = data.speciescaught;
+    });
   }
 
   getSpeciesIconSrc(name: string) {
