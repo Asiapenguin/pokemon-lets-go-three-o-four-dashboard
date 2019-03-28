@@ -24,7 +24,9 @@ export class BattleGymLeaderComponent implements OnInit {
     if (win) {
       const newBalanceAccount = this.currentAccount;
       newBalanceAccount.balance += gymLeader.reward;
-      newBalanceAccount.badgesowned += 1;
+      if (this.currentAccount.badgesowned <= 7) {
+        newBalanceAccount.badgesowned += 1;
+      }
       this.newBalance.emit(newBalanceAccount.balance);
       // PUT /user
       this.accountService.update(newBalanceAccount).then(
