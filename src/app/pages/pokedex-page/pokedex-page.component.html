@@ -23,7 +23,7 @@
     <button class="btn btn-primary" (click)="filterSpeciesBy(filterType)">Filter</button>
   </div>
 </div>
-<div *ngIf="currentSpecies" class="row mt-4">
+<div *ngIf="currentSpecies.length > 0" class="row mt-4">
   <div class="col-sm-2 species-icon" *ngFor="let s of currentSpecies">
     <img width="80%" height="80%" [src]="getSpeciesIconSrc(s.name)" /><br />
     <span
@@ -39,4 +39,7 @@
     ><br />
     {{ s.name }}
   </div>
+</div>
+<div *ngIf="currentSpecies.length <= 0" class="mt-4">
+  There are no Pokemon species of this type
 </div>
