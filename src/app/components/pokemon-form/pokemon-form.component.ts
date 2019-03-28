@@ -7,6 +7,7 @@ import { UrlService } from "src/app/services/url.service";
 export class PokemonInfo {
   public dexNum: number;
   public quantity: number;
+  public ownerId: number;
   public editPokemonId: number;
   public newCharId: number;
   public deletePokemonId: number;
@@ -32,6 +33,7 @@ export class PokemonFormComponent implements OnInit {
     console.log(event);
     const newPokemon = new Pokemon();
     newPokemon.dexNum = this.pokemonInfo.dexNum;
+    newPokemon.ownerId = this.pokemonInfo.ownerId;
     // DISCUSSION: Can make an endpoint for this
     const promiseArr = [];
     for (let i = 0; i < this.pokemonInfo.quantity; i++) {
@@ -52,28 +54,28 @@ export class PokemonFormComponent implements OnInit {
     );
   }
 
-  editOwner() {
-    // PATCH: /owner
-    this.http
-      .patch(this.urlService.getEndpoint() + "/owner", {
-        pokemonId: this.pokemonInfo.editPokemonId,
-        newCharId: this.pokemonInfo.newCharId
-      })
-      .subscribe(
-        data => {
-          console.log(
-            `PATCH - Pokemon ID ${
-              this.pokemonInfo.editPokemonId
-            }'s owner is changed to Owner ID ${
-              this.pokemonInfo.newCharId
-            }: ${data}`
-          );
-        },
-        err => {
-          console.log("PokemonForm PATCH /owner error: ", err);
-        }
-      );
-  }
+  // editOwner() {
+  //   // PATCH: /owner
+  //   this.http
+  //     .patch(this.urlService.getEndpoint() + "/owner", {
+  //       pokemonId: this.pokemonInfo.editPokemonId,
+  //       newCharId: this.pokemonInfo.newCharId
+  //     })
+  //     .subscribe(
+  //       data => {
+  //         console.log(
+  //           `PATCH - Pokemon ID ${
+  //             this.pokemonInfo.editPokemonId
+  //           }'s owner is changed to Owner ID ${
+  //             this.pokemonInfo.newCharId
+  //           }: ${data}`
+  //         );
+  //       },
+  //       err => {
+  //         console.log("PokemonForm PATCH /owner error: ", err);
+  //       }
+  //     );
+  // }
 
   deletePokemon() {
     const pokemonToBeDeleted = new Pokemon();

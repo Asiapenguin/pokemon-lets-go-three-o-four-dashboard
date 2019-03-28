@@ -1,7 +1,7 @@
 <label>Add Pokemon(s)</label>
 <form #addForm="ngForm" (ngSubmit)="addPokemon($event)">
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <div class="input-group mb-3">
         <input
           #dexNumInput
@@ -14,7 +14,20 @@
         />
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-3">
+      <div class="input-group mb-3">
+        <input
+          #ownerIdInput
+          type="text"
+          name="ownerId"
+          class="form-control"
+          required
+          [(ngModel)]="pokemonInfo.ownerId"
+          placeholder="Owner ID"
+        />
+      </div>
+    </div>
+    <div class="col-3">
       <div class="input-group mb-3">
         <input
           #quantityInput
@@ -27,12 +40,12 @@
         />
       </div>
     </div>
-    <div class="col-4">
-      <button type="submit" class="btn btn-secondary">Add</button>
+    <div class="col-3">
+      <button type="submit" class="btn btn-secondary" [disabled]="addForm.invalid">Add</button>
     </div>
   </div>
 </form>
-<label>Edit Owner of Existing Pokemon</label>
+<!-- <label>Edit Owner of Existing Pokemon</label>
 <form #editForm="ngForm" (ngSubmit)="editOwner()">
   <div class="row">
     <div class="col-4">
@@ -65,7 +78,7 @@
       <button type="submit" class="btn btn-secondary">Change</button>
     </div>
   </div>
-</form>
+</form> -->
 <label>Delete a Pokemon</label>
 <form #deleteForm="ngForm" (ngSubmit)="deletePokemon()">
   <div class="row">
@@ -83,7 +96,7 @@
       </div>
     </div>
     <div class="col-4">
-      <button type="submit" class="btn btn-secondary">
+      <button type="submit" class="btn btn-secondary" [disabled]="deleteForm.invalid">
         Delete
       </button>
     </div>
