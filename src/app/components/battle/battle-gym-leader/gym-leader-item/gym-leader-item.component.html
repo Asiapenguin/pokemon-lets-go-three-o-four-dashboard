@@ -1,8 +1,9 @@
 <td>{{ gymLeader.name }}</td>
 <td>{{ gymLeader.reward }}</td>
 <td>
-  <button class="btn btn-primary" (click)="getResult()"  [disabled]="result === 'WIN'">
+  <button class="btn btn-primary" (click)="getResult()"  [disabled]="result === 'WIN' || allFainted">
     Battle
   </button>
   <span class="ml-2">{{ result }}</span>
+  <span *ngIf="allFainted">Heal Your Pokemon</span>
 </td>

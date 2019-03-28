@@ -41,7 +41,7 @@ export class BattleGymLeaderComponent implements OnInit {
       const willFaintPokemon = this.currentPokemon.find(
         p => p.status === "Healthy"
       );
-      if (willFaintPokemon) {
+      if (typeof willFaintPokemon !== "undefined") {
         willFaintPokemon.status = "Fainted";
         // PUT /pokemon
         this.pokemonService.update(willFaintPokemon).then(

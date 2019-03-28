@@ -13,6 +13,7 @@
         *ngFor="let trainer of currentTrainers"
         app-trainer-item
         [trainer]="trainer"
+        [currentPokemon]="currentPokemon"
         (win)="battleTrainer($event, trainer)"
       ></tr>
     </tbody>
