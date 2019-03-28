@@ -83,14 +83,6 @@ export class MapMoveComponent implements OnInit {
           err => {
             console.log("MapMoveComponent PUT /user/:id/move error: ", err);
           });
-          // this.accountService.update(this.currentAccount).then((data: Account) => {
-          //   this.currentMap = this.mapRegionInfo.newRegion;
-          //   this.currentMapSrc = this.getMapSrc(this.currentMap.name);
-          //   this.newRegion.emit(mapRegion);
-          // },
-          // err => {
-          //   console.log("MapMoveComponent PUT /user/:id/move error: ", err);
-          // });
         },
         err => {
           console.log("MapMoveComponent GET /mapRegion/:name error: ", err);

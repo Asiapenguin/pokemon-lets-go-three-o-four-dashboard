@@ -1,0 +1,107 @@
+<h4>Account Movement Logs</h4>
+<div class="table-container">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th width="20%">Log ID</th>
+        <th width="20%">Account ID</th>
+        <th width="30%">Destination Name</th>
+        <th width="30%">Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mal of moveAcrossLogs">
+        <td>{{ mal.id }}</td>
+        <td>{{ mal.playableid }}</td>
+        <td>{{ mal.mapname }}</td>
+        <td>{{ mal.happenedat | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h4 class="mt-4">Pokemon Healed Logs</h4>
+<div class="table-container">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th width="20%">Pokemon ID</th>
+        <th width="20%">Building ID</th>
+        <th width="30%">Account ID</th>
+        <th width="30%">Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hl of healLogs">
+        <td>{{ hl.pokemonid }}</td>
+        <td>{{ hl.buildingid }}</td>
+        <td>{{ hl.playableid }}</td>
+        <td>{{ hl.happenedat | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h4 class="mt-4">Pokemon Caught Logs</h4>
+<div class="table-container">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th width="20%">Account ID</th>
+        <th width="20%">Pokemon ID</th>
+        <th width="30%">Item ID</th>
+        <th width="30%">Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cl of catchLogs">
+        <td>{{ cl.playableid }}</td>
+        <td>{{ cl.pokemonid }}</td>
+        <td>{{ cl.itemid }}</td>
+        <td>{{ cl.happenedat | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h4 class="mt-4">Used Item Logs</h4>
+<div class="table-container">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th width="20%">Account ID</th>
+        <th width="20%">Pokemon ID</th>
+        <th width="30%">Item ID</th>
+        <th width="30%">Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ul of useLogs">
+        <td>{{ ul.playableid }}</td>
+        <td>{{ ul.pokemonid }}</td>
+        <td>{{ ul.itemid }}</td>
+        <td>{{ ul.happenedat | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h4 class="mt-4">Item Sold Logs</h4>
+<div class="table-container">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th width="20%">Log ID</th>
+        <th width="20%">Item ID</th>
+        <th width="20%">Building ID</th>
+        <th width="20%">Account ID</th>
+        <th width="20%">Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sl of sellLogs">
+        <td>{{ sl.id }}</td>
+        <td>{{ sl.itemid }}</td>
+        <td>{{ sl.buildingid }}</td>
+        <td>{{ sl.playableid }}</td>
+        <td>{{ sl.happenedat | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

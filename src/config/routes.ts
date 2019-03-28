@@ -8,6 +8,7 @@ import { AdminAuthenticationGuard } from "src/app/services/admin-authentication.
 import { AccountNewPageComponent } from "src/app/pages/account-new-page/account-new-page.component";
 import { PokedexPageComponent } from 'src/app/pages/pokedex-page/pokedex-page.component';
 import { ProfilePageComponent } from "src/app/pages/profile-page/profile-page.component";
+import { LogActivityPageComponent } from 'src/app/pages/log-activity-page/log-activity-page.component';
 
 export const userAuthenticatedRoutes: Routes = [
   {
@@ -49,6 +50,13 @@ export const adminAuthenticatedRoutes: Routes = [
     component: AdminPageComponent,
     data: {
       title: "Admin"
+    }
+  },
+  {
+    path: "logs",
+    component: LogActivityPageComponent,
+    data: {
+      title: "Logs & Activities"
     }
   }
 ];
