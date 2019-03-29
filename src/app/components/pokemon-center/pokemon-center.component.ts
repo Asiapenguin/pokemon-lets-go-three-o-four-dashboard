@@ -33,7 +33,7 @@ export class PokemonCenterComponent implements OnInit {
           pokemon => pokemon.status === "Fainted"
         );
         for (let i = 0; i < fainted.length; i++) {
-          // this.createHealLog(fainted[i].id, this.currentAccount.id);
+          this.createHealLog(fainted[i].id, this.currentAccount.id);
           const currentFainted = fainted[i];
           fainted[i].status = "Healthy";
           // PUT /pokemon/:id
