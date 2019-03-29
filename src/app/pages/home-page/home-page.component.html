@@ -13,7 +13,7 @@
       There is no Pokemart in this location. Move to somewhere else to buy items!
     </div>
     <div *ngIf="pokemonCenter">
-      <app-pokemon-center></app-pokemon-center>
+      <app-pokemon-center [currentAccount]="currentAccount" [currentMap]="currentMap"></app-pokemon-center>
     </div>
     <div *ngIf="!pokemonCenter">
       There is no Pokemon Center in this location. Move to somewhere else to heal your Pokemon!

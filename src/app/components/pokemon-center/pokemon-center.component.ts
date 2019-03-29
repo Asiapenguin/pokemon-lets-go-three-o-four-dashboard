@@ -1,12 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { AuthenticationService } from "src/app/services/authentication.service";
+import { Component, OnInit, Input } from "@angular/core";
 import { Account } from "src/app/models/account";
 import { PokemonService } from "src/app/services/pokemon.service";
-import { ListResponse } from "src/app/services/resource.service";
 import { Pokemon } from "src/app/models/pokemon";
-import { HttpClient } from "@angular/common/http";
-import { UrlService } from "src/app/services/url.service";
-import { AccountService } from 'src/app/services/account.service';
+import { AccountService } from "src/app/services/account.service";
+import { MapRegion } from "src/app/models/mapRegion";
+import { HealLogService } from "src/app/services/heal-log.service";
+import { HealLog } from "src/app/models/healLog";
 
 @Component({
   selector: "app-pokemon-center",
@@ -14,37 +13,61 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ["./pokemon-center.component.scss"]
 })
 export class PokemonCenterComponent implements OnInit {
-  currentAccount: Account;
+  @Input() currentAccount: Account;
+  @Input() currentMap: MapRegion;
 
   constructor(
-    private authenticationService: AuthenticationService,
     private pokemonService: PokemonService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private healLogService: HealLogService
   ) {}
 
-  ngOnInit() {
-    this.currentAccount = this.authenticationService.getAccount();
-  }
+  ngOnInit() {}
 
   healAllPokemon() {
-    this.accountService.getAccountPokemon(this.currentAccount.id).then((currentAccountPokemon: Pokemon[]) => {
-      const promiseArr = [];
-      const fainted = currentAccountPokemon.filter(
-        pokemon => pokemon.status === "Fainted"
-      );
-      for (let i = 0; i < fainted.length; i++) {
-        const currentFainted = fainted[i];
-        fainted[i].status = "Healthy";
-        // PATCH: /pokemon ???
-        promiseArr.push(this.pokemonService.update(currentFainted));
-      }
-
-      Promise.all(promiseArr).then(data => {
-        console.log(
-          "PokemonCenterComponent healAllPokemon Promise.all: ",
-          data
+    this.accountService
+      .getAccountPokemon(this.currentAccount.id)
+      .then((currentAccountPokemon: Pokemon[]) => {
+        const promiseArr = [];
+        const fainted = currentAccountPokemon.filter(
+          pokemon => pokemon.status === "Fainted"
         );
+        for (let i = 0; i < fainted.length; i++) {
+          // this.createHealLog(fainted[i].id, this.currentAccount.id);
+          const currentFainted = fainted[i];
+          fainted[i].status = "Healthy";
+          // PUT /pokemon/:id
+          promiseArr.push(this.pokemonService.update(currentFainted));
+        }
+
+        Promise.all(promiseArr).then(data => {
+          console.log(
+            "PokemonCenterComponent healAllPokemon Promise.all: ",
+            data
+          );
+        });
       });
+  }
+
+  createHealLog(pokemonId: number, playableId: number) {
+    const pokemonCenterBuildingId = this.currentMap.buildings
+      .filter(b => b.type === "Pokemon Center")
+      .map(b => b.id);
+    const newHealLog = new HealLog();
+    newHealLog.buildingid = pokemonCenterBuildingId[0];
+    newHealLog.playableid = playableId;
+    newHealLog.pokemonid = pokemonId;
+    this.healLogService.create(newHealLog).then((data: HealLog) => {
+      console.log(
+        `Heal log created for Account with ID ${
+          data.playableid
+        } healing Pokemon with ID ${data.pokemonid} at Building with ID ${
+          data.buildingid
+        }`
+      );
+    },
+    err => {
+      console.log("PokemonCenterComponent POST /heal failed: ", err);
     });
   }
 }

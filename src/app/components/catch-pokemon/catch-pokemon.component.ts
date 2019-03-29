@@ -8,6 +8,9 @@ import { Account } from "src/app/models/account";
 import { Pokemon } from "src/app/models/pokemon";
 import { AccountService } from "src/app/services/account.service";
 import { ItemService } from "src/app/services/item.service";
+import { CatchLogService } from "src/app/services/catch-log.service";
+import { Item } from "src/app/models/item";
+import { CatchLog } from "src/app/models/catchLog";
 
 @Component({
   selector: "app-catch-pokemon",
@@ -26,16 +29,19 @@ export class CatchPokemonComponent implements OnInit, OnChanges {
     private speciesService: SpeciesService,
     private accountService: AccountService,
     private pokemonService: PokemonService,
-    private itemService: ItemService
-  ) { }
+    private itemService: ItemService,
+    private catchLogService: CatchLogService
+  ) {}
 
   ngOnInit() {
     this.getCurrentSpecies().then((data: Species[]) => {
       this.species = data;
     });
-    this.accountService.getAccountItemTypeCounts(this.currentAccount.id).then(data => {
-      this.currentItemTypeCounts = data;
-    });
+    this.accountService
+      .getAccountItemTypeCounts(this.currentAccount.id)
+      .then(data => {
+        this.currentItemTypeCounts = data;
+      });
   }
 
   ngOnChanges() {
@@ -49,15 +55,23 @@ export class CatchPokemonComponent implements OnInit, OnChanges {
       this.speciesService
         .findWhere("foundAt", this.currentMap.name)
         .get()
-        .then((data: ListResponse<Species>) => {
-          console.log("CatchPokemonComponent Current MapRegion's Species: ", data);
-          res(data.data);
-        },
-        err => {
-          console.log("CatchPokemonComponent GET /species/search?foundAt= error: ", err);
-          rej(err);
-        });
-    })
+        .then(
+          (data: ListResponse<Species>) => {
+            console.log(
+              "CatchPokemonComponent Current MapRegion's Species: ",
+              data
+            );
+            res(data.data);
+          },
+          err => {
+            console.log(
+              "CatchPokemonComponent GET /species/search?foundAt= error: ",
+              err
+            );
+            rej(err);
+          }
+        );
+    });
   }
 
   getSpeciesIconSrc(name: string) {
@@ -72,26 +86,52 @@ export class CatchPokemonComponent implements OnInit, OnChanges {
     const rand = Math.floor(Math.random() * this.species.length);
     const randomPokemonDexNum = this.species[rand].id;
 
-    this.itemService.setItemToUsed(this.currentAccount.id, this.ballToUse).then(data => {
-      this.currentItemTypeCounts[this.ballToUse] -= 1;
-    });
+    this.itemService
+      .setItemToUsed(this.currentAccount.id, this.ballToUse)
+      .then((usedItem: Item) => {
+        this.currentItemTypeCounts[this.ballToUse] -= 1;
 
-    if (Math.random() > 0.5) {
-      const pokemon = new Pokemon();
-      pokemon.ownerId = this.currentAccount.id;
-      pokemon.dexNum = randomPokemonDexNum;
-      // POST /pokemon
-      this.pokemonService.create(pokemon).then(
-        (data: Pokemon) => {
-          this.result = `${data.name} has been caught!`;
-          console.log("Pokemon caught: ", data);
-        },
-        err => {
-          console.log("CatchPokemonComponent ");
+        if (Math.random() > 0.5) {
+          const pokemon = new Pokemon();
+          pokemon.ownerId = this.currentAccount.id;
+          pokemon.dexNum = randomPokemonDexNum;
+          // POST /pokemon
+          this.pokemonService.create(pokemon).then(
+            (newPokemon: Pokemon) => {
+              this.result = `${newPokemon.name} has been caught!`;
+              console.log("Pokemon caught: ", newPokemon);
+              this.createCatchLog(
+                this.currentAccount.id,
+                newPokemon.id,
+                usedItem.id
+              );
+            },
+            err => {
+              console.log("CatchPokemonComponent ");
+            }
+          );
+        } else {
+          this.result = "Pokemon escaped!";
         }
+      });
+  }
+
+  createCatchLog(accountId: number, pokemonId: number, itemId: number) {
+    const newCatchLog = new CatchLog();
+    newCatchLog.playableid = accountId;
+    newCatchLog.pokemonid = pokemonId;
+    newCatchLog.itemid = itemId;
+    this.catchLogService.create(newCatchLog).then((data: CatchLog) => {
+      console.log(
+        `Catch log created for Account with ID ${
+          data.playableid
+        } using Item with ID ${data.itemid} to catch Pokemon with ID ${
+          data.pokemonid
+        }`
       );
-    } else {
-      this.result = "Pokemon escaped!";
-    }
+    },
+    err => {
+      console.log("CatchPokemonComponent POST /catch failed: ", err);
+    });
   }
 }

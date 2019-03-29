@@ -1,33 +1,43 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Account } from 'src/app/models/account';
-import { ItemTypeService } from 'src/app/services/itemtype.service';
-import { ItemType } from 'src/app/models/itemType';
-import { ListResponse } from 'src/app/services/resource.service';
-import { AccountService } from 'src/app/services/account.service';
-import { ItemPurchase } from './sale-item/sale-item.component';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Account } from "src/app/models/account";
+import { ItemTypeService } from "src/app/services/itemtype.service";
+import { ItemType } from "src/app/models/itemType";
+import { ListResponse } from "src/app/services/resource.service";
+import { AccountService } from "src/app/services/account.service";
+import { ItemPurchase } from "./sale-item/sale-item.component";
 import { Item } from "src/app/models/item";
 import { ItemService } from "src/app/services/item.service";
+import { SellLogService } from "src/app/services/sell-log.service";
 
 @Component({
-  selector: 'app-pokemart',
-  templateUrl: './pokemart.component.html',
-  styleUrls: ['./pokemart.component.scss']
+  selector: "app-pokemart",
+  templateUrl: "./pokemart.component.html",
+  styleUrls: ["./pokemart.component.scss"]
 })
 export class PokemartComponent implements OnInit {
-
   @Input() currentAccount: Account;
   @Output() newBalance = new EventEmitter<number>();
   saleItemTypes = [];
 
-  constructor(private itemTypeService: ItemTypeService, private itemService: ItemService, private accountService: AccountService) { }
+  constructor(
+    private itemTypeService: ItemTypeService,
+    private itemService: ItemService,
+    private accountService: AccountService,
+    private sellLogService: SellLogService
+  ) {}
 
   ngOnInit() {
-    this.itemTypeService.findAll().get().then((data: ListResponse<ItemType>) => {
-      this.saleItemTypes = data.data;
-    },
-    err => {
-      console.log("AccountForm GET /item error: ", err);
-    });
+    this.itemTypeService
+      .findAll()
+      .get()
+      .then(
+        (data: ListResponse<ItemType>) => {
+          this.saleItemTypes = data.data;
+        },
+        err => {
+          console.log("AccountForm GET /item error: ", err);
+        }
+      );
   }
 
   purchase(itemPurchase: ItemPurchase) {
@@ -35,20 +45,26 @@ export class PokemartComponent implements OnInit {
     const newBalance = this.currentAccount.balance - cost;
 
     const editAccount = this.currentAccount;
-    console.log("PokemartComponent editAccount: ", this.currentAccount);
     editAccount.balance = newBalance;
     this.newBalance.emit(editAccount.balance);
     // PUT: /account
-    this.accountService.update(editAccount).then((data: Account) => {
-      console.log(`PUT: Account ID ${editAccount.id}'s balance is now ${data.balance}`);
-      this.currentAccount.balance = data.balance;
-    },
-    err => {
-      console.log("PokemartComponent PATCH /account new balance error: ", err);
-    });
+    this.accountService.update(editAccount).then(
+      (data: Account) => {
+        console.log(
+          `PUT: Account ID ${editAccount.id}'s balance is now ${data.balance}`
+        );
+        this.currentAccount.balance = data.balance;
+      },
+      err => {
+        console.log(
+          "PokemartComponent PATCH /account new balance error: ",
+          err
+        );
+      }
+    );
 
     const promiseArr = [];
-    for (let i = 0 ; i < itemPurchase.quantity ; i++) {
+    for (let i = 0; i < itemPurchase.quantity; i++) {
       const newItem = new Item();
       newItem.playableId = this.currentAccount.id;
       newItem.type = itemPurchase.itemType.type;
@@ -56,12 +72,17 @@ export class PokemartComponent implements OnInit {
       promiseArr.push(this.itemService.create(newItem));
     }
 
-    Promise.all(promiseArr).then(data => {
-      console.log(`All items have been created for Account ID ${editAccount.id}: ${data}`);
-    },
-    err => {
-      console.log("PokemartComponent Promise.all POST /item error: ", err);
-    });
-
+    Promise.all(promiseArr).then(
+      data => {
+        console.log(
+          `All items have been created for Account ID ${
+            editAccount.id
+          }: ${data}`
+        );
+      },
+      err => {
+        console.log("PokemartComponent Promise.all POST /item error: ", err);
+      }
+    );
   }
 }

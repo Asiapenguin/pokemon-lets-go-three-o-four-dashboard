@@ -4,7 +4,6 @@ import {
   Input,
   Output,
   EventEmitter,
-  SimpleChange,
   OnChanges
 } from "@angular/core";
 import { MapRegion } from "src/app/models/mapRegion";

@@ -4,6 +4,8 @@ import { Pokemon } from "src/app/models/pokemon";
 import { Account } from "src/app/models/account";
 import { AccountService } from "src/app/services/account.service";
 import { PokemonService } from "src/app/services/pokemon.service";
+import { BattleLog } from "src/app/models/battleLog";
+import { BattleLogService } from "src/app/services/battle-log.service";
 
 @Component({
   selector: "app-battle-gym-leader",
@@ -16,7 +18,11 @@ export class BattleGymLeaderComponent implements OnInit {
   @Input() currentPokemon: Pokemon[];
   @Output() newBalance = new EventEmitter<number>();
 
-  constructor(private accountService: AccountService, private pokemonService: PokemonService) {}
+  constructor(
+    private accountService: AccountService,
+    private pokemonService: PokemonService,
+    private battleLogService: BattleLogService
+  ) {}
 
   ngOnInit() {}
 
@@ -58,5 +64,25 @@ export class BattleGymLeaderComponent implements OnInit {
         );
       }
     }
+
+    this.createBattleLog(this.currentAccount.id, gymLeader.id);
+  }
+
+  createBattleLog(playableId: number, nonPlayableId: number) {
+    const newBattleLog = new BattleLog();
+    newBattleLog.playableid = playableId;
+    newBattleLog.nonplayableid = nonPlayableId;
+    this.battleLogService.create(newBattleLog).then(
+      (data: BattleLog) => {
+        console.log(
+          `Battle log created for Account with ID ${
+            data.playableid
+          } battling NPC with ID ${data.nonplayableid}`
+        );
+      },
+      err => {
+        console.log("BattleTrainerComponent POST /battle failed: ", err);
+      }
+    );
   }
 }
