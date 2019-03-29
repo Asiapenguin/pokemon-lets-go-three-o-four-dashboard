@@ -11,6 +11,8 @@ import { ItemService } from "src/app/services/item.service";
 import { CatchLogService } from "src/app/services/catch-log.service";
 import { Item } from "src/app/models/item";
 import { CatchLog } from "src/app/models/catchLog";
+import { UseLog } from 'src/app/models/useLog';
+import { UseLogService } from 'src/app/services/use-log.service';
 
 @Component({
   selector: "app-catch-pokemon",
@@ -30,7 +32,8 @@ export class CatchPokemonComponent implements OnInit, OnChanges {
     private accountService: AccountService,
     private pokemonService: PokemonService,
     private itemService: ItemService,
-    private catchLogService: CatchLogService
+    private catchLogService: CatchLogService,
+    private useLogService: UseLogService
   ) {}
 
   ngOnInit() {
@@ -90,6 +93,7 @@ export class CatchPokemonComponent implements OnInit, OnChanges {
       .setItemToUsed(this.currentAccount.id, this.ballToUse)
       .then((usedItem: Item) => {
         this.currentItemTypeCounts[this.ballToUse] -= 1;
+        this.createUseLog(this.currentAccount.id, null, usedItem.id);
 
         if (Math.random() > 0.5) {
           const pokemon = new Pokemon();
@@ -105,6 +109,7 @@ export class CatchPokemonComponent implements OnInit, OnChanges {
                 newPokemon.id,
                 usedItem.id
               );
+              this.createUseLog(this.currentAccount.id, newPokemon.id, usedItem.id)
             },
             err => {
               console.log("CatchPokemonComponent ");
@@ -132,6 +137,23 @@ export class CatchPokemonComponent implements OnInit, OnChanges {
     },
     err => {
       console.log("CatchPokemonComponent POST /catch failed: ", err);
+    });
+  }
+
+  createUseLog(accountId: number, pokemonId: number, itemId: number) {
+    const newUseLog = new UseLog();
+    newUseLog.playableid = accountId;
+    newUseLog.pokemonid = pokemonId;
+    newUseLog.itemid = itemId;
+    this.useLogService.create(newUseLog).then((data: UseLog) => {
+      console.log(
+        `Use log created for Account with ID ${
+          data.playableid
+        } using Item with ID ${data.itemid}`
+      );
+    },
+    err => {
+      console.log("CatchPokemonComponent POST /use failed: ", err);
     });
   }
 }
