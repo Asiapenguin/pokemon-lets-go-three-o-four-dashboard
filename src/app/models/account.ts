@@ -8,7 +8,7 @@ export class Account extends Resource {
   password: string;
   badgesowned: number;
   locatedat: string;
-  characterName: string;
+  name: string;
   gender: string;
   balance: number;
   admin: boolean;

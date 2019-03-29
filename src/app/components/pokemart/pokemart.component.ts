@@ -35,6 +35,7 @@ export class PokemartComponent implements OnInit {
     const newBalance = this.currentAccount.balance - cost;
 
     const editAccount = this.currentAccount;
+    console.log("PokemartComponent editAccount: ", this.currentAccount);
     editAccount.balance = newBalance;
     this.newBalance.emit(editAccount.balance);
     // PUT: /account

@@ -10,7 +10,7 @@ import { Item } from "src/app/models/item";
 export class SignUpData {
   public username: string;
   public password: string;
-  public characterName: string;
+  public name: string;
   public gender: string;
   public starterChoice: number;
 }
@@ -48,26 +48,6 @@ export class AccountNewPageComponent {
           },
           err => {
             console.log(err);
-          }
-        );
-
-        const promiseArr = [];
-        for (let i = 0; i < 20; i++) {
-          const item = new Item();
-          item.playableId = this.account.id;
-          item.type = "Poke Ball";
-          promiseArr.push(this.itemService.create(item));
-        }
-
-        Promise.all(promiseArr).then(
-          data => {
-            console.log(
-              "AccountNewPage Promise.all create 20 Poke Balls: ",
-              data
-            );
-          },
-          err => {
-            console.log("AccountNewPage Promise.all error: ", err);
           }
         );
       },

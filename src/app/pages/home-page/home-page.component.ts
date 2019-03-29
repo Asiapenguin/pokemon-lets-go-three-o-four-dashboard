@@ -29,6 +29,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.currentAccount = this.authenticationService.getAccount();
+    console.log("HomePageComponent currentAccount:", this.currentAccount);
   }
 
   setBalance(balance: number) {
