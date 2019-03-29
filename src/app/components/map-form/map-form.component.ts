@@ -7,7 +7,7 @@ import { MapRegion } from 'src/app/models/mapRegion';
 
 export class MapRegionInfo {
   public mapRegionName: string;
-  public maxSpawnNum: number;
+  public maxSpawnNumber: number;
 }
 
 @Component({
@@ -33,11 +33,11 @@ export class MapFormComponent implements OnInit {
 
   updateSpawnNumber() {
     // PUT: /mapRegion/:name
-    this.mapRegionService.updateSpawnNumber(this.mapRegionInfo.mapRegionName, this.mapRegionInfo.maxSpawnNum).then((data: MapRegion) => {
+    this.mapRegionService.updateSpawnNumber(this.mapRegionInfo.mapRegionName, this.mapRegionInfo.maxSpawnNumber).then((data: MapRegion) => {
       console.log(`PUT /mapRegion/${this.mapRegionInfo.mapRegionName}: ${data}`);
     },
     err => {
-      console.log(`PUT /mapRegion/${this.mapRegionInfo.mapRegionName} error: ${err}`)
+      console.log(`PUT /mapRegion/${this.mapRegionInfo.mapRegionName} error: ${err}`);
     });
   }
 

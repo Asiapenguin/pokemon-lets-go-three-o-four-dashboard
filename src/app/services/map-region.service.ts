@@ -7,7 +7,6 @@ import { UrlService } from './url.service';
   providedIn: 'root'
 })
 export class MapRegionService extends ResourceService {
-  
   constructor(injector: Injector, private urlService: UrlService) {
     super(injector, MapRegion);
   }
@@ -27,6 +26,6 @@ export class MapRegionService extends ResourceService {
           rej(err);
         }
       );
-    })
+    });
   }
 }

@@ -24,12 +24,15 @@ export class NpcFormComponent implements OnInit {
   }
 
   updateReward() {
+    const newNpc = new Npc();
+    newNpc.id = this.npcInfo.npcId;
+    newNpc.reward = this.npcInfo.newReward;
     // PUT: /npc/:id
-    this.npcService.updateReward(this.npcInfo.npcId, this.npcInfo.newReward).then((data: Npc) => {
-      console.log(`PUT /npc/${this.npcInfo.npcId}: ${data}`);
+    this.npcService.update(newNpc).then((data: Npc) => {
+      console.log(`Updated reward of NPC with ID ${data.id} to ${data.reward}`);
     },
     err => {
-      console.log(`PUT /npc/${this.npcInfo.npcId} error: ${err}`);
-    })
+      console.log(`NpcFormComponent PUT /npc/:id failed: ${err}`);
+    });
   }
 }

@@ -1,5 +1,5 @@
 <label>Set MapRegion Max Spawn</label>
-<form #updateMaxSpanForm="ngForm" (ngSubmit)="updateSpawnNumber()">
+<form #updateMaxSpawnForm="ngForm" (ngSubmit)="updateSpawnNumber()">
   <div class="row">
     <div class="col-4">
       <select
@@ -15,11 +15,11 @@
     <div class="col-4">
       <div class="input-group mb-3">
         <input #maxSpawnInput type="text" name="maxSpawn" class="form-control" required
-          [(ngModel)]="mapRegionInfo.maxSpawnNum" placeholder="Max Spawn" />
+          [(ngModel)]="mapRegionInfo.maxSpawnNumber" placeholder="Max Spawn" />
       </div>
     </div>
     <div class="col-4">
-      <button type="submit" class="btn btn-secondary">Set</button>
+      <button type="submit" class="btn btn-secondary" [disabled]="updateMaxSpawnForm.invalid">Set</button>
     </div>
   </div>
 </form>
