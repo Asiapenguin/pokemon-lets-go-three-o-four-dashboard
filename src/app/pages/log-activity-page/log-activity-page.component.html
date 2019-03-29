@@ -26,7 +26,6 @@
       <table class="table table-striped table-sm">
         <thead>
           <tr>
-            <th width="20%">Pokemon ID</th>
             <th width="20%">Building ID</th>
             <th width="30%">Account ID</th>
             <th width="30%">Timestamp</th>
@@ -34,7 +33,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let hl of healLogs">
-            <td>{{ hl.pokemonid }}</td>
             <td>{{ hl.buildingid }}</td>
             <td>{{ hl.playableid }}</td>
             <td>{{ hl.happenedat | date: 'short' }}</td>

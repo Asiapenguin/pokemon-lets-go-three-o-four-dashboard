@@ -33,12 +33,12 @@ export class PokemonCenterComponent implements OnInit {
           pokemon => pokemon.status === "Fainted"
         );
         for (let i = 0; i < fainted.length; i++) {
-          this.createHealLog(fainted[i].id, this.currentAccount.id);
           const currentFainted = fainted[i];
           fainted[i].status = "Healthy";
           // PUT /pokemon/:id
           promiseArr.push(this.pokemonService.update(currentFainted));
         }
+        this.createHealLog(this.currentAccount.id);
 
         Promise.all(promiseArr).then(data => {
           console.log(
@@ -49,19 +49,18 @@ export class PokemonCenterComponent implements OnInit {
       });
   }
 
-  createHealLog(pokemonId: number, playableId: number) {
+  createHealLog(playableId: number) {
     const pokemonCenterBuildingId = this.currentMap.buildings
       .filter(b => b.type === "Pokemon Center")
       .map(b => b.id);
     const newHealLog = new HealLog();
     newHealLog.buildingid = pokemonCenterBuildingId[0];
     newHealLog.playableid = playableId;
-    newHealLog.pokemonid = pokemonId;
     this.healLogService.create(newHealLog).then((data: HealLog) => {
       console.log(
         `Heal log created for Account with ID ${
           data.playableid
-        } healing Pokemon with ID ${data.pokemonid} at Building with ID ${
+        } at Building with ID ${
           data.buildingid
         }`
       );
