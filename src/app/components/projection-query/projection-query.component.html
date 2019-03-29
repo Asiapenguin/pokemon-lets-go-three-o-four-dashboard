@@ -1,6 +1,7 @@
 <h4>Conditional Filter Species</h4>
 <div class="row">
   <div class="col-3">
+    <label>SELECT</label>
     <select
       name="projectionSelect"
       class="form-control"
@@ -14,6 +15,7 @@
     </select>
   </div>
   <div class="col-3">
+    <label>WHERE</label>
     <select
       name="conditionSelect"
       class="form-control"
@@ -27,9 +29,10 @@
     </select>
   </div>
   <div class="col-3">
+    <label>WHERE Value</label>
     <div class="input-group mx-auto">
       <input
-        #oldAccIdInput
+        #conditionValueInput
         type="text"
         name="conditionValue"
         class="form-control"
@@ -40,7 +43,7 @@
     </div>
   </div>
   <div class="col-3">
-    <label></label>
+    <label>Filter species</label><br />
     <button
       class="btn btn-primary"
       (click)="filterSpeciesBy(projectionType, conditionType, conditionValue)"
