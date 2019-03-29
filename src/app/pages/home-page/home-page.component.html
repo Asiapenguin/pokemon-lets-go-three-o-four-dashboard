@@ -7,7 +7,7 @@
   <div class="col-6">
     <app-map-move (newRegion)="setCurrentRegion($event)"></app-map-move>
     <div *ngIf="pokemart">
-      <app-pokemart [currentAccount]="currentAccount" (newBalance)="setBalance($event)"></app-pokemart>
+      <app-pokemart [currentAccount]="currentAccount" [currentMap]="currentMap" (newBalance)="setBalance($event)"></app-pokemart>
     </div>
     <div *ngIf="!pokemart">
       There is no Pokemart in this location. Move to somewhere else to buy items!

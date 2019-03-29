@@ -3,12 +3,12 @@
   {{ saleItemType.type }}
 </td>
 <td>{{ saleItemType.cost }}</td>
-<td>
+<!-- <td>
   <i class="fas fa-minus" (click)="decrementQuantity()"></i>
   {{ currentQuantity }}
   <i class="fas fa-plus" (click)="incrementQuantity()"></i>
-</td>
+</td> -->
 <td>
-  <button class="btn btn-primary" [disabled]="!haveEnoughBalance || currentQuantity === 0"
+  <button class="btn btn-primary" [disabled]="!haveEnoughBalance"
     (click)="makePurchase()">Buy</button>
 </td>
