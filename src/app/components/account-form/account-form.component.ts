@@ -34,9 +34,9 @@ export class AccountFormComponent implements OnInit {
     this.itemTypeService.findAll().get().then((data: ListResponse<ItemType>) => {
       this.itemTypes = data.data;
     },
-    err => {
-      console.log("AccountForm GET /itemType error: ", err);
-    });
+      err => {
+        console.log("AccountForm GET /itemType error: ", err);
+      });
   }
 
   deleteAccount() {
@@ -75,21 +75,15 @@ export class AccountFormComponent implements OnInit {
   // }
 
   addItem() {
-    const promiseArr = [];
-
-    for (let i = 0; i < this.accountInfo.itemQuantity; i++) {
-      const newItem = new Item();
-      newItem.playableId = this.accountInfo.addItemAccId;
-      newItem.type = this.accountInfo.itemType;
-      // POST /item
-      promiseArr.push(this.itemService.create(newItem));
-    }
-
-    Promise.all(promiseArr).then(data => {
-      console.log(`${this.accountInfo.itemQuantity} item(s) of type ${this.accountInfo.itemType} have been added to account ID ${this.accountInfo.addItemAccId}`)
+    const newItem = new Item();
+    newItem.playableId = this.accountInfo.addItemAccId;
+    newItem.type = this.accountInfo.itemType;
+    // POST /item
+    this.itemService.create(newItem).then((data: Item) => {
+      console.log(`Item of type ${data.type} have been added to account ID ${this.accountInfo.addItemAccId}`)
     },
-      err => {
-        console.log("AccountFormComponent Promise.all POST /item error: ", err);
-      });
+    err => {
+      console.log("AccountFormComponent Promise.all POST /item error: ", err);
+    });
   }
 }
